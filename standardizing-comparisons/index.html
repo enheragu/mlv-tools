@@ -1,0 +1,319 @@
+---
+layout: tool_document
+redirect_path: /mlv-tools/standardizing-comparisons
+meta_description: Align metrics and protocols before comparing model performance across runs and settings.
+with_checkbox_list: true
+with_chart_interactions: true
+header_title: Standardizing Comparisons
+header_subtitle: Align metrics and protocols before comparing models
+intro_title: Standardization workspace
+intro_text: Define consistent metric treatment and reporting criteria to compare runs fairly.
+footer_report_enabled: true
+footer_report_label: Report problem
+footer_credits_html: |
+  <p>Author: <a href="https://enheragu.github.io/" target="_blank" rel="noopener noreferrer">Enrique Heredia-Aguado</a></p>
+custom_css:
+  - /mlv-tools/assets/tool-core/mlva/comparison-shell.css
+  - css/style.css
+intro_inline_cite: true
+custom_js:
+  - https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js
+  - /tool-pages-theme/assets/shared/histogram-normal-chart.js
+  - /tool-pages-theme/assets/shared/chart-legend.js
+  - /mlv-tools/assets/publications-config.js
+  - /mlv-tools/assets/tool-core/tool-core.js
+  - /mlv-tools/assets/tool-core/mlva/ui-core.js
+  - /mlv-tools/assets/normality-core.js
+  - /mlv-tools/assets/tool-core/mlva/simulation-core.js
+  - /mlv-tools/assets/tool-core/mlva/page-shell.js
+  - /mlv-tools/assets/tool-core/mlva/comparison-i18n-core.js
+  - /mlv-tools/assets/tool-core/mlva/comparison-app-core.js
+  - js/tool-config.js
+  - js/i18n.js
+  - js/bootstrap.js
+  - js/standardizing-comparisons.js
+---
+<!--THEME_BODY-->
+  <div class="content-shell">
+    <section class="shared-tabbed-stack shared-tabbed-shell shared-tabbed-shell-lg shared-tabbed-shell-strip">
+      <div id="preset-tabs" class="shared-tablist shared-tablist-joined shared-tablist-fill" role="tablist" aria-label="Use-case preset"></div>
+      <div class="shared-tabbed-panel">
+        <p id="case-context-note" class="case-context-note" data-inline-cite>MNIST case uses repeated-run metrics generated externally; detection case uses multispectral fusion pipelines from a dedicated utility repository.</p>
+        <main>
+          <div class="controls-grid shared-controls-grid">
+            <section class="metric-scope-block shared-tabbed-shell shared-tabbed-shell-lg shared-tabbed-shell-strip">
+              <div id="metric-tabs" class="shared-tablist shared-tablist-joined" role="tablist" aria-label="Metric"></div>
+              <div class="shared-tabbed-panel">
+                <div class="models-head-row panel-block">
+                  <h3 class="models-title-inline shared-card-title"><span id="config-title">Data setup</span> · <span id="models-label">Models</span></h3>
+                  <div class="shared-segmented-group shared-segmented-sm" role="group" aria-label="Model selection actions">
+                    <button id="btn-all" class="btn-ghost btn-sm" type="button">Select all</button>
+                    <button id="btn-clear" class="btn-ghost btn-sm" type="button">Clear</button>
+                  </div>
+                </div>
+                <div class="panel-block checkbox-wrapper checkbox-wrapper--models selector-block--framed">
+                  <div id="model-list" class="checkbox-list checkbox-list--models"></div>
+                </div>
+                <section class="sim-config-block shared-sim-setup-block shared-controls-row" aria-labelledby="sim-config-title">
+                  <h3 id="sim-config-title" class="shared-plot-title">Simulation setup</h3>
+                  <p id="sim-config-text" class="sim-method-copy">Configure trial counts for Monte Carlo and Bootstrap before running the results.</p>
+                  <div class="select-row">
+                    <div>
+                      <label id="mc-trials-label" for="mc-trials-input">Monte Carlo simulations</label>
+                      <div class="stepper">
+                        <button class="btn-stepper" data-step-target="mc-trials-input" data-step="-500" type="button">−</button>
+                        <input id="mc-trials-input" type="number" min="200" max="300000" step="100" value="6000">
+                        <button class="btn-stepper" data-step-target="mc-trials-input" data-step="500" type="button">+</button>
+                      </div>
+                    </div>
+                    <div>
+                      <label id="bs-trials-label" for="bs-trials-input">Bootstrap resamples</label>
+                      <div class="stepper">
+                        <button class="btn-stepper" data-step-target="bs-trials-input" data-step="-500" type="button">−</button>
+                        <input id="bs-trials-input" type="number" min="200" max="300000" step="100" value="6000">
+                        <button class="btn-stepper" data-step-target="bs-trials-input" data-step="500" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="select-row">
+                    <div>
+                      <label for="sampling-pmin-input">Percentile range (min)</label>
+                      <div class="stepper">
+                        <button class="btn-stepper" data-step-target="sampling-pmin-input" data-step="-1" type="button">−</button>
+                        <input id="sampling-pmin-input" type="number" min="1" max="99" step="1" value="85">
+                        <button class="btn-stepper" data-step-target="sampling-pmin-input" data-step="1" type="button">+</button>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="sampling-pmax-input">Percentile range (max)</label>
+                      <div class="stepper">
+                        <button class="btn-stepper" data-step-target="sampling-pmax-input" data-step="-1" type="button">−</button>
+                        <input id="sampling-pmax-input" type="number" min="2" max="100" step="1" value="100">
+                        <button class="btn-stepper" data-step-target="sampling-pmax-input" data-step="1" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <button id="run-sim" class="btn-primary btn-block" type="button">Compute results</button>
+                  <p id="sim-progress" class="sim-progress hint shared-status-hint" aria-live="polite"></p>
+                </section>
+              </div>
+            </section>
+
+            {% capture standardizing_plot_footer %}
+              <div class="plot-range-controls range-skin-vivid">
+                <label class="shared-range-control range-double" id="percentile-range-label">
+                  <span class="shared-range-label-row">
+                    <strong id="val-percentile-min" class="shared-range-value">85</strong>
+                    <span id="lbl-percentile-range">Percentile range</span>
+                    <strong id="val-percentile-max" class="shared-range-value">100</strong>
+                  </span>
+                  <div class="range-double-track" id="percentile-range-track">
+                    <input id="percentile-range-slider-min" type="range" min="0" max="100" value="85" step="1" aria-label="Min percentile">
+                    <input id="percentile-range-slider-max" type="range" min="0" max="100" value="100" step="1" aria-label="Max percentile">
+                  </div>
+                </label>
+              </div>
+            {% endcapture %}
+            {% include widgets/widget_plot_card.html
+              title='Survival function plot'
+              title_id='chart-title'
+              id_key='chart'
+              canvas_id='survival-chart'
+              expand_button=true
+              footer_extra=standardizing_plot_footer
+            %}
+            {{- '<!-- comparison-app-core placeholder target (hidden) -->' }}
+            <canvas id="distribution-chart" style="display:none" aria-hidden="true"></canvas>
+          </div>
+
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div id="chart-modal-overlay" class="chart-modal-overlay hidden">
+    <div class="chart-modal">
+      <div class="chart-modal-head">
+        <h3 class="shared-plot-title">Survival function plot</h3>
+        <button id="btn-close-chart-modal" class="btn-outline btn-chart-close" type="button">Close</button>
+      </div>
+      <canvas id="survival-chart-modal"></canvas>
+      <div class="plot-range-controls range-skin-vivid">
+        <label class="shared-range-control range-double" id="percentile-range-label-modal">
+          <span class="shared-range-label-row">
+            <strong id="val-percentile-min-modal" class="shared-range-value">85</strong>
+            <span>Percentile range</span>
+            <strong id="val-percentile-max-modal" class="shared-range-value">100</strong>
+          </span>
+          <div class="range-double-track" id="percentile-range-track-modal">
+            <input id="percentile-range-slider-min-modal" type="range" min="0" max="100" value="85" step="1" aria-label="Min percentile">
+            <input id="percentile-range-slider-max-modal" type="range" min="0" max="100" value="100" step="1" aria-label="Max percentile">
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div id="sampling-modal-overlay" class="chart-modal-overlay hidden">
+    <div class="chart-modal">
+      <div class="chart-modal-head">
+        <h3 id="sampling-modal-title" class="shared-plot-title"></h3>
+        <button id="btn-close-sampling-modal" class="btn-outline btn-chart-close" type="button">Close</button>
+      </div>
+      <div class="chart-modal-body">
+        <div class="se-modal-charts">
+          <div class="se-modal-chart-wrap se-modal-chart-wrap--main"><canvas id="sampling-modal-canvas"></canvas></div>
+          <div class="se-modal-chart-wrap se-modal-chart-wrap--deriv"><canvas id="sampling-modal-canvas-deriv"></canvas></div>
+        </div>
+        <div id="se-modal-legend" class="shared-chart-legend shared-chart-legend--vertical se-modal-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="results-section" class="hidden">
+    {% include widgets/widget_section_heading.html
+      title_id='results-title'
+      title='Results'
+      emphasis='strong'
+    %}
+    <div id="results-output-block" class="results-output hidden">
+      {% include mlva/widget_model_summary_panel.html
+        sort_enabled=true
+        sortable_columns='best,mean,p90'
+      %}
+
+      {% include mlva/widget_normality_panel.html %}
+
+      <section id="sampling-exceedance-block" class="panel card prechecks-card widget-box-accent hidden">
+        <h2 class="shared-intro-title">P(≥1 above threshold) by sample size</h2>
+        <p class="results-note">For the selected percentile P, probability that at least one of N samples exceeds the fitted-normal threshold. One line per model + average.</p>
+        <div class="plot-range-controls range-skin-vivid">
+          <label class="shared-range-control" for="sampling-percentile-slider">
+            <span class="shared-range-label-row">
+              <span>Percentile P</span>
+              <strong id="val-sampling-percentile" class="shared-range-value">95</strong>
+            </span>
+            <input id="sampling-percentile-slider" type="range" min="85" max="100" value="95" step="1">
+          </label>
+        </div>
+        <div class="decision-tree-grid sampling-plots-grid">
+          {% include widgets/widget_plot_card.html
+            title='Bootstrap'
+            canvas_id='sampling-bs-chart'
+            button_id='btn-expand-sampling-bs'
+          %}
+          {% include widgets/widget_plot_card.html
+            title='Monte Carlo'
+            canvas_id='sampling-mc-chart'
+            button_id='btn-expand-sampling-mc'
+          %}
+        </div>
+      </section>
+
+      <section id="sampling-avg-block" class="panel card prechecks-card widget-box-accent hidden">
+        <h2 class="shared-intro-title">Model-average exceedance across percentile range</h2>
+        <p class="results-note">Each line is the model-average exceedance curve for one percentile in the computed range. Shows how the curve shifts as the threshold tightens.</p>
+        <div class="decision-tree-grid sampling-plots-grid">
+          {% include widgets/widget_plot_card.html
+            title='Bootstrap'
+            canvas_id='sampling-avg-bs-chart'
+            button_id='btn-expand-sampling-avg-bs'
+          %}
+          {% include widgets/widget_plot_card.html
+            title='Monte Carlo'
+            canvas_id='sampling-avg-mc-chart'
+            button_id='btn-expand-sampling-avg-mc'
+          %}
+        </div>
+      </section>
+
+      <section id="sampling-error-block" class="panel card prechecks-card widget-box-accent hidden">
+        <h2 id="sampling-error-title" class="shared-intro-title">Sampling error vs. sample size</h2>
+        <p id="sampling-error-note" class="results-note" data-inline-cite>The sampling error (standard error of the mean) decreases as &sigma;/&radic;N. A few extra training runs can substantially reduce estimation uncertainty. The derivative plot below highlights where diminishing returns set in (Section 4.2).</p>
+        <section class="shared-tabbed-shell shared-tabbed-shell-strip">
+          <div id="sampling-error-param-tabs" class="shared-tablist shared-tablist-joined" role="tablist" aria-label="Sampling error parameter">
+            <button class="shared-tab active" role="tab" aria-selected="true" aria-controls="sampling-error-tab-mean" data-se-param="mean" type="button">Mean</button>
+            <button class="shared-tab" role="tab" aria-selected="false" aria-controls="sampling-error-tab-std" data-se-param="std" type="button">Std</button>
+          </div>
+          <div class="shared-tabbed-panel">
+            <div id="sampling-error-tab-mean" role="tabpanel">
+              {% capture se_legend_mean_body %}
+                <div id="se-shared-legend-mean" class="shared-chart-legend"></div>
+              {% endcapture %}
+              {% include widgets/widget_content_box.html
+                title='Plot legend'
+                title_tone='subtle'
+                body=se_legend_mean_body
+              %}
+              <div class="decision-tree-grid sampling-error-triple-grid">
+                <section class="panel panel-chart card shared-plot-card se-dual-card">
+                  <div class="card-headline shared-plot-headline">
+                    <h3 class="shared-plot-title">Analytical</h3>
+                    <button id="btn-expand-se-mean-analytical" class="btn-outline btn-chart-expand" type="button">Expand</button>
+                  </div>
+                  <div class="chart-wrap se-dual-top"><canvas id="se-mean-analytical-chart" class="shared-plot-canvas"></canvas></div>
+                  <div class="chart-wrap se-dual-bottom"><canvas id="se-mean-analytical-deriv-chart" class="shared-plot-canvas"></canvas></div>
+                </section>
+                <section class="panel panel-chart card shared-plot-card se-dual-card">
+                  <div class="card-headline shared-plot-headline">
+                    <h3 class="shared-plot-title">Bootstrap</h3>
+                    <button id="btn-expand-se-mean-bootstrap" class="btn-outline btn-chart-expand" type="button">Expand</button>
+                  </div>
+                  <div class="chart-wrap se-dual-top"><canvas id="se-mean-bootstrap-chart" class="shared-plot-canvas"></canvas></div>
+                  <div class="chart-wrap se-dual-bottom"><canvas id="se-mean-bootstrap-deriv-chart" class="shared-plot-canvas"></canvas></div>
+                </section>
+                <section class="panel panel-chart card shared-plot-card se-dual-card">
+                  <div class="card-headline shared-plot-headline">
+                    <h3 class="shared-plot-title">Monte Carlo</h3>
+                    <button id="btn-expand-se-mean-montecarlo" class="btn-outline btn-chart-expand" type="button">Expand</button>
+                  </div>
+                  <div class="chart-wrap se-dual-top"><canvas id="se-mean-montecarlo-chart" class="shared-plot-canvas"></canvas></div>
+                  <div class="chart-wrap se-dual-bottom"><canvas id="se-mean-montecarlo-deriv-chart" class="shared-plot-canvas"></canvas></div>
+                </section>
+              </div>
+            </div>
+            <div id="sampling-error-tab-std" role="tabpanel" class="hidden">
+              {% capture se_legend_std_body %}
+                <div id="se-shared-legend-std" class="shared-chart-legend"></div>
+              {% endcapture %}
+              {% include widgets/widget_content_box.html
+                title='Plot legend'
+                title_tone='subtle'
+                body=se_legend_std_body
+              %}
+              <div class="decision-tree-grid sampling-error-triple-grid">
+                <section class="panel panel-chart card shared-plot-card se-dual-card">
+                  <div class="card-headline shared-plot-headline">
+                    <h3 class="shared-plot-title">Analytical</h3>
+                    <button id="btn-expand-se-std-analytical" class="btn-outline btn-chart-expand" type="button">Expand</button>
+                  </div>
+                  <div class="chart-wrap se-dual-top"><canvas id="se-std-analytical-chart" class="shared-plot-canvas"></canvas></div>
+                  <div class="chart-wrap se-dual-bottom"><canvas id="se-std-analytical-deriv-chart" class="shared-plot-canvas"></canvas></div>
+                </section>
+                <section class="panel panel-chart card shared-plot-card se-dual-card">
+                  <div class="card-headline shared-plot-headline">
+                    <h3 class="shared-plot-title">Bootstrap</h3>
+                    <button id="btn-expand-se-std-bootstrap" class="btn-outline btn-chart-expand" type="button">Expand</button>
+                  </div>
+                  <div class="chart-wrap se-dual-top"><canvas id="se-std-bootstrap-chart" class="shared-plot-canvas"></canvas></div>
+                  <div class="chart-wrap se-dual-bottom"><canvas id="se-std-bootstrap-deriv-chart" class="shared-plot-canvas"></canvas></div>
+                </section>
+                <section class="panel panel-chart card shared-plot-card se-dual-card">
+                  <div class="card-headline shared-plot-headline">
+                    <h3 class="shared-plot-title">Monte Carlo</h3>
+                    <button id="btn-expand-se-std-montecarlo" class="btn-outline btn-chart-expand" type="button">Expand</button>
+                  </div>
+                  <div class="chart-wrap se-dual-top"><canvas id="se-std-montecarlo-chart" class="shared-plot-canvas"></canvas></div>
+                  <div class="chart-wrap se-dual-bottom"><canvas id="se-std-montecarlo-deriv-chart" class="shared-plot-canvas"></canvas></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div id="sim-output" class="shared-stat-chip" style="display:none" aria-hidden="true"></div>
+      <table style="display:none" aria-hidden="true"><tbody id="results-table-body"></tbody></table>
+    </div>
+  </section>
+

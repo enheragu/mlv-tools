@@ -1,0 +1,27 @@
+title: mlv-tools
+url: https://enheragu.github.io
+baseurl: /mlv-tools
+
+plugins:
+  - jekyll-remote-theme
+
+remote_theme: enheragu/tool-pages-theme
+
+shared_assets_base: /mlv-tools/assets/shared
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      lang: en
+      compact_mode: true
+      project: mlv-tools
+      tool_name: MLV Tools
+      analytics_measurement_id: G-3ZY4LBWQB3
+      intro_inline_cite: true
+      footer_related_contextual: true
+      with_tools_nav: true
+      with_analysis_panels: true
+      with_chart_interactions: true
+      with_publication_ui: true

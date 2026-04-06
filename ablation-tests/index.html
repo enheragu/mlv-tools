@@ -1,0 +1,178 @@
+---
+layout: tool_document
+redirect_path: /mlv-tools/ablation-tests
+meta_description: Compare component variants under repeated training runs and estimate uncertainty over model ranking.
+with_checkbox_list: true
+header_title: Ablation Tests
+header_subtitle: Compare component variants under repeated training runs
+intro_title: Ablation analysis workspace
+intro_text: Evaluate how each component contributes to performance and stability across repeated experiments.
+footer_report_enabled: true
+footer_report_label: Report problem
+footer_credits_html: |
+  <p>Author: <a href="https://enheragu.github.io/" target="_blank" rel="noopener noreferrer">Enrique Heredia-Aguado</a></p>
+custom_css:
+  - /mlv-tools/assets/tool-core/mlva/comparison-shell.css
+  - css/style.css
+intro_inline_cite: true
+custom_js:
+  - https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js
+  - /tool-pages-theme/assets/shared/histogram-normal-chart.js
+  - /tool-pages-theme/assets/shared/chart-legend.js
+  - /mlv-tools/assets/publications-config.js
+  - /mlv-tools/assets/tool-core/tool-core.js
+  - /mlv-tools/assets/tool-core/mlva/ui-core.js
+  - /mlv-tools/assets/normality-core.js
+  - /mlv-tools/assets/tool-core/mlva/simulation-core.js
+  - /mlv-tools/assets/tool-core/mlva/page-shell.js
+  - /mlv-tools/assets/tool-core/mlva/comparison-i18n-core.js
+  - /mlv-tools/assets/tool-core/mlva/comparison-app-core.js
+  - js/tool-config.js
+  - js/i18n.js
+  - js/bootstrap.js
+  - js/interaction-plot.js
+  - js/seed-percentile-plot.js
+---
+<!--THEME_BODY-->
+  <div class="content-shell">
+    <section class="shared-tabbed-stack shared-tabbed-shell shared-tabbed-shell-lg shared-tabbed-shell-strip">
+      <div id="preset-tabs" class="shared-tablist shared-tablist-joined shared-tablist-fill" role="tablist" aria-label="Use-case preset"></div>
+      <div class="shared-tabbed-panel">
+        <p id="case-context-note" class="case-context-note" data-inline-cite>MNIST case uses repeated-run metrics generated externally; detection case uses multispectral fusion pipelines from a dedicated utility repository.</p>
+        <main>
+          <div class="controls-grid shared-controls-grid">
+            <section class="metric-scope-block shared-tabbed-shell shared-tabbed-shell-lg shared-tabbed-shell-strip">
+              <div id="metric-tabs" class="shared-tablist shared-tablist-joined" role="tablist" aria-label="Metric"></div>
+              <div class="shared-tabbed-panel">
+                <div class="models-head-row panel-block">
+                  <h3 class="models-title-inline shared-card-title"><span id="config-title">Data setup</span> · <span id="models-label">Models</span></h3>
+                  <div class="shared-segmented-group shared-segmented-sm" role="group" aria-label="Model selection actions">
+                    <button id="btn-all" class="btn-ghost btn-sm" type="button">Select all</button>
+                    <button id="btn-clear" class="btn-ghost btn-sm" type="button">Clear</button>
+                  </div>
+                </div>
+                <div class="panel-block checkbox-wrapper checkbox-wrapper--models selector-block--framed">
+                  <div id="model-list" class="checkbox-list checkbox-list--models"></div>
+                </div>
+                <section class="sim-config-block shared-sim-setup-block shared-controls-row" aria-labelledby="sim-config-title">
+                  <h3 id="sim-config-title" class="shared-plot-title">Simulation setup</h3>
+                  <p id="sim-config-text" class="sim-method-copy">Configure trial counts for Monte Carlo and Bootstrap before running the results.</p>
+                  <div class="select-row">
+                    {% include mlva/widget_stepper_input.html
+                      input_id='mc-trials-input'
+                      label_id='mc-trials-label'
+                      label_text='Monte Carlo simulations'
+                      min=200 max=300000 step=100 value=6000 delta=500
+                    %}
+                    {% include mlva/widget_stepper_input.html
+                      input_id='bs-trials-input'
+                      label_id='bs-trials-label'
+                      label_text='Bootstrap resamples'
+                      min=200 max=300000 step=100 value=6000 delta=500
+                    %}
+                  </div>
+                  <button id="run-sim" class="btn-primary btn-block" type="button">Compute results</button>
+                  <p id="sim-progress" class="sim-progress hint shared-status-hint" aria-live="polite"></p>
+                </section>
+              </div>
+            </section>
+
+            {% include widgets/widget_plot_card.html
+              id_key='chart'
+              title='Histogram + fitted normal'
+            %}
+          </div>
+
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <section id="results-section" class="hidden">
+    {% include widgets/widget_section_heading.html
+      title_id='results-title'
+      title='Results'
+      emphasis='strong'
+    %}
+    <div id="results-output-block" class="results-output hidden">
+      {% include mlva/widget_model_summary_panel.html
+        sort_enabled=true
+        sortable_columns='best,mean,p90'
+      %}
+
+      {% include mlva/widget_normality_panel.html %}
+
+      <div class="ablation-results-dummy hidden" aria-hidden="true">
+        <p id="results-method-note" class="results-note">Monte Carlo samples from fitted normals; Bootstrap samples from empirical data with replacement.</p>
+        <div id="sim-output" class="shared-stat-chip"></div>
+        {% include mlva/widget_sim_results_table.html %}
+      </div>
+
+      <section id="decision-tree-block" class="hidden">
+        {% capture decision_tree_body %}
+          <p id="decision-tree-intro" class="results-note">Starting from each fixed condition, this view shows the probability of reaching the global best condition.</p>
+          <div id="decision-tree-canvas" class="decision-tree-canvas"></div>
+        {% endcapture %}
+        {% include widgets/widget_content_box.html
+          panel_class='panel card decision-tree-card'
+          title='Decision path tree'
+          title_id='decision-tree-title'
+          title_tone='accent'
+          body=decision_tree_body
+        %}
+        <div id="decision-tree-plots" class="decision-tree-plots hidden"></div>
+      </section>
+
+      <section id="interaction-plot-block" class="panel card prechecks-card widget-box-accent hidden">
+        <h2 id="interaction-plot-title" class="shared-intro-title">ANOVA interaction plot</h2>
+        <p id="interaction-plot-note" class="results-note">Each chart shows the mean metric for every level of one factor, with separate lines for each level of the other factor. Non-parallel lines indicate interaction effects between the two factors.</p>
+        <div id="interaction-plot-container" class="decision-tree-grid"></div>
+      </section>
+
+      <section id="seed-percentile-block" class="panel card prechecks-card widget-box-accent hidden">
+        <h2 id="seed-percentile-title" class="shared-intro-title">Seed percentile explorer</h2>
+        <p id="seed-percentile-note" class="results-note">Each mini-histogram shows the distribution of metric values for one condition. Move the slider to select a seed and see where its result falls in each distribution, with the corresponding percentile.</p>
+        <div class="plot-range-controls range-skin-vivid">
+          <label class="shared-range-control" for="seed-index-slider">
+            <span class="shared-range-label-row">
+              <span id="seed-index-label-text">Seed</span>
+              <span class="shared-range-value seed-id-display">index: <strong id="seed-index-label-value">1</strong>; ID: <code id="seed-id-value"></code></span>
+            </span>
+            <input id="seed-index-slider" type="range" min="1" max="1" value="1" step="1">
+          </label>
+        </div>
+        <div id="seed-percentile-container" class="seed-percentile-grid"></div>
+      </section>
+    </div>
+  </section>
+
+  <div id="interaction-modal-overlay" class="chart-modal-overlay hidden">
+    <div class="chart-modal">
+      <div class="chart-modal-head">
+        <h3 id="interaction-modal-title" class="shared-plot-modal-title">Interaction plot</h3>
+        <button id="btn-close-interaction-modal" class="btn-outline btn-chart-close" type="button">Close</button>
+      </div>
+      <canvas id="interaction-modal-canvas"></canvas>
+    </div>
+  </div>
+
+  <div id="decision-tree-modal-overlay" class="chart-modal-overlay hidden" onclick="event.target===this && window.AblationTestsApp?.closeDecisionTreeModal?.()">
+    <div class="chart-modal" onclick="event.stopPropagation()">
+      <div class="chart-modal-head">
+        <h3 id="decision-tree-modal-title" class="shared-plot-modal-title">Decision path tree</h3>
+        <button id="btn-close-decision-tree-modal" class="btn-outline btn-chart-close" type="button">Close</button>
+      </div>
+      <div id="decision-tree-modal-canvas" class="decision-tree-canvas"></div>
+    </div>
+  </div>
+
+  <div id="chart-modal-overlay" class="chart-modal-overlay hidden" onclick="event.target===this && window.AblationTestsApp?.closeChartModal?.()">
+    <div class="chart-modal" onclick="event.stopPropagation()">
+      <div class="chart-modal-head">
+        <h3 id="chart-modal-title" class="shared-plot-modal-title">Histogram + fitted normal</h3>
+        <button id="btn-close-chart-modal" class="btn-outline btn-chart-close" type="button">Close</button>
+      </div>
+      <canvas id="distribution-chart-modal"></canvas>
+    </div>
+  </div>
+

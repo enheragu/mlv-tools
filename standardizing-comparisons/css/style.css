@@ -1,0 +1,130 @@
+.panel.card {
+  padding: 1rem;
+}
+
+.plot-range-controls {
+  padding: 0.55rem 0.25rem 0.15rem;
+}
+
+#survival-chart,
+#survival-chart-modal {
+  display: block;
+  width: 100%;
+  height: 420px;
+}
+
+.sampling-plots-grid {
+  margin-top: .75rem;
+  align-items: stretch;
+}
+
+.sampling-plots-grid .card {
+  min-height: 740px;
+}
+
+.sampling-plots-grid .chart-wrap {
+  flex: 1 1 auto;
+  min-height: 680px;
+}
+
+#sampling-exceedance-block .plot-range-controls,
+#sampling-avg-block .plot-range-controls,
+#sampling-error-block .plot-range-controls {
+  margin: .45rem 0 .25rem;
+}
+
+/* Sampling error: 3-column grid with stacked dual-panel charts */
+.sampling-error-triple-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.se-dual-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.se-dual-top {
+  flex: 3 1 0;
+  min-height: 380px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.se-dual-top canvas {
+  border-radius: 10px 10px 0 0;
+}
+
+.se-dual-bottom {
+  flex: 2 1 0;
+  min-height: 250px;
+  padding-top: 0;
+  margin-top: 0;
+}
+.se-dual-bottom canvas {
+  border-radius: 0 0 10px 10px;
+}
+
+/* Legend box bottom spacing */
+#sampling-error-block .widget-box-subtle {
+  margin-bottom: .75rem;
+}
+
+/* Shared legend overrides handled by .shared-chart-legend in app-shell.css */
+
+/* Modal: dual canvas layout with side legend */
+#sampling-modal-overlay .chart-modal {
+  height: min(92vh, 860px);
+  width: min(92vw, 1100px);
+  padding: .75rem 1rem;
+  border-radius: 8px;
+}
+
+#sampling-modal-overlay .chart-modal-body {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: .75rem;
+}
+
+.se-modal-charts {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.se-modal-chart-wrap {
+  position: relative;
+  min-height: 0;
+}
+
+.se-modal-chart-wrap--main {
+  flex: 3 1 0;
+  padding-bottom: 0;
+}
+
+.se-modal-chart-wrap--deriv {
+  flex: 2 1 0;
+  padding-top: 0;
+}
+
+.se-modal-chart-wrap canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Modal side legend sizing */
+.se-modal-legend {
+  flex-shrink: 0;
+  min-width: 80px;
+  max-width: 180px;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .sampling-error-triple-grid {
+    grid-template-columns: 1fr;
+  }
+}

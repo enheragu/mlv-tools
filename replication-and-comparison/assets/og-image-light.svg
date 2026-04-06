@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Replication and Comparison light preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#edf3fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="68" y="58" width="1064" height="514" rx="22" fill="#ffffff" stroke="#cfd8e3"/>
+
+  <text x="112" y="156" fill="#2f81f7" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Replication and Comparison</text>
+  <text x="112" y="210" fill="#1e293b" font-size="45" font-family="Segoe UI, Arial, sans-serif">Variance overlap and rank inversion</text>
+
+  <g transform="translate(112,264)">
+    <rect x="0" y="0" width="455" height="252" rx="16" fill="#f8fbff" stroke="#cfd8e3"/>
+    <line x1="168" y1="220" x2="168" y2="158" stroke="#3fb950" stroke-width="4"/>
+    <line x1="290" y1="220" x2="290" y2="104" stroke="#2f81f7" stroke-width="4"/>
+  </g>
+
+  <g transform="translate(617,264)">
+    <rect x="0" y="0" width="495" height="252" rx="16" fill="#f8fbff" stroke="#cfd8e3"/>
+
+    <path d="M 40 216 C 105 216, 153 46, 201 46 C 250 46, 298 216, 363 216" fill="none" stroke="#2f81f7" stroke-width="4" stroke-linecap="round"/>
+
+    <path d="M 121 216 C 201 216, 218 100, 290 100 C 363 100, 379 216, 460 216" fill="none" stroke="#3fb950" stroke-width="4" stroke-linecap="round"/>
+
+    <line x1="193" y1="216" x2="193" y2="174" stroke="#3fb950" stroke-width="3.5" opacity="0.85"/>
+
+    <line x1="274" y1="216" x2="274" y2="127" stroke="#2f81f7" stroke-width="3.5" opacity="0.85"/>
+  </g>
+</svg>

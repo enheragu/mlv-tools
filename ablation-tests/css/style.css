@@ -1,0 +1,50 @@
+/* Seed percentile grid */
+.seed-percentile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: .6rem;
+}
+
+.seed-percentile-mini {
+  min-height: 0;
+}
+
+.seed-percentile-mini .chart-wrap--mini {
+  min-height: 180px;
+  flex: 1 1 auto;
+}
+
+.seed-percentile-mini .shared-plot-title--sm {
+  font-size: var(--txt-xs, .75rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#seed-percentile-block .plot-range-controls {
+  margin: .6rem 0 .3rem;
+}
+
+.seed-id-display {
+  font-size: var(--txt-sm, .82rem);
+  white-space: nowrap;
+}
+
+.seed-id-display code {
+  font-family: var(--ff-mono, monospace);
+}
+
+.seed-pct-badge {
+  font-size: var(--txt-sm, .82rem);
+  font-weight: 700;
+  margin-left: auto;
+  padding: 0 .3rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .seed-percentile-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}

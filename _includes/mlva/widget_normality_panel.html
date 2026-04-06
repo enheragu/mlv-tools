@@ -1,0 +1,45 @@
+{% assign normality_title = include.title | default: 'Normality test' %}
+{% assign normality_title_id = include.title_id | default: 'prechecks-title' %}
+{% assign normality_panel_class = include.panel_class | default: 'panel card prechecks-card normality-card' %}
+
+{% capture normality_body %}
+  <p id="results-intro" class="results-note">Estimate disorder probability over the selected models, averaging N sampled scores per model.</p>
+  <p id="normality-note" class="results-note" data-inline-cite>Normality diagnostics justify Monte Carlo representativeness. If diagnostics are weak, Bootstrap is the robust reference.</p>
+
+  <div class="normality-block">
+    <div class="results-table-wrap shared-results-table-wrap shared-results-table-wrap--raised-head">
+      <table class="results-table shared-results-table shared-results-table--head-center shared-results-table--zebra shared-results-table--hover shared-results-table--cap-right">
+        <thead>
+          <tr>
+            <th class="shared-th-ghost" colspan="5" aria-hidden="true"></th>
+            <th id="th-shapiro-group" class="shared-th-cap shared-th-cap--edge-right" colspan="2" scope="colgroup">Shapiro-Wilk</th>
+            <th id="th-normality-summary-group" class="shared-th-cap shared-th-cap--edge-right" colspan="3" scope="colgroup">Normality summary</th>
+          </tr>
+          <tr>
+            <th id="th-model" scope="col">Model</th>
+            <th id="th-median" scope="col">Median</th>
+            <th id="th-mean" scope="col">Mean</th>
+            <th id="th-skewness" scope="col">Skewness</th>
+            <th id="th-kurtosis" scope="col">Kurtosis (Fisher)</th>
+            <th id="th-shapiro-w" scope="col">W</th>
+            <th id="th-shapiro-p" scope="col">p-value (%)</th>
+            <th id="th-summary-loc" scope="col" title="Mean ≈ Median">Mean≈Med</th>
+            <th id="th-summary-shape" scope="col" title="Skewness + Kurtosis">Skew+Kurt</th>
+            <th id="th-summary-sw" scope="col" title="Shapiro-Wilk test">S-W</th>
+          </tr>
+        </thead>
+        <tbody id="normality-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+{% endcapture %}
+
+{% include widgets/widget_content_box.html
+  panel_class=normality_panel_class
+  title=normality_title
+  title_id=normality_title_id
+  title_tone='accent'
+  collapsible=true
+  open=false
+  body=normality_body
+%}

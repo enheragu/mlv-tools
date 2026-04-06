@@ -1,0 +1,54 @@
+{
+  "global": {
+    "title": {
+      "en": "Citing and Related Work",
+      "es": "Referencias y trabajos relacionados"
+    },
+    "support": {
+      "intro": {
+        "en": "If this work was useful to you, consider giving a star to the {repo_link} and citing these works:",
+        "es": "Si este trabajo te ha resultado \u00fatil, considera dar una estrella al {repo_link} o citar estos trabajos:"
+      },
+      "repo": {
+        "url": "https://github.com/enheragu/mlv-tools",
+        "link_text": {
+          "en": "GitHub repository",
+          "es": "repositorio de GitHub"
+        }
+      },
+      "publication_keys": [
+        "heredia2026ml_variance_tools",
+        "heredia2026variance_analysis_ml"
+      ]
+    },
+    "links": [
+      {
+        "key": "mnist_learning_playground",
+        "label": "mnist-learning-playground",
+        "url": "https://github.com/enheragu/mnist-learning-playground",
+        "description": {
+          "en": "Source repository for repeated-run MNIST calculations used in this analysis.",
+          "es": "Repositorio origen de los c\u00e1lculos con repeticiones en MNIST usados en este an\u00e1lisis."
+        }
+      },
+      {
+        "key": "yolo_test_utils",
+        "label": "yolo_test_utils",
+        "url": "https://github.com/enheragu/yolo_test_utils",
+        "description": {
+          "en": "Fusion methods and training pipeline code for multispectral detection experiments.",
+          "es": "M\u00e9todos de fusi\u00f3n y c\u00f3digo de entrenamiento para experimentos de detecci\u00f3n multiespectral."
+        }
+      }
+    ],
+    "publication_keys": [
+      "heredia2025fusion_static"
+    ]
+  },
+  "tools": {
+    "Landing": {},
+    "ReplicationAndComparison": { "category_id": "mlv-tools" },
+    "AblationTests": { "category_id": "mlv-tools" },
+    "StandardizingComparisons": { "category_id": "mlv-tools" }
+  }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Replication and Comparison favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="url(#bg)" stroke="#30363d"/>
+
+  <path d="M 6 50 C 14 50, 20 12, 26 12 C 32 12, 38 50, 46 50" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+
+  <path d="M 16 50 C 26 50, 28 24, 37 24 C 46 24, 48 50, 58 50" fill="none" stroke="#3fb950" stroke-width="2.5" stroke-linecap="round"/>
+
+  <line x1="25" y1="50" x2="25" y2="40.5" stroke="#3fb950" stroke-width="2" opacity="0.85"/>
+
+  <line x1="35" y1="50" x2="35" y2="30" stroke="#58a6ff" stroke-width="2" opacity="0.85"/>
+</svg>
