@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Standardizing Comparisons favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="url(#bg)" stroke="#30363d"/>
+
+  <!-- Two survival curves: both start from same point (standardized scale),
+       different shapes — blue steeper, green more gradual -->
+  <path d="M 10 12 C 18 12, 24 24, 32 36 C 40 48, 50 54, 54 54" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 10 12 C 22 12, 34 26, 42 38 C 50 50, 54 54, 54 54" fill="none" stroke="#3fb950" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

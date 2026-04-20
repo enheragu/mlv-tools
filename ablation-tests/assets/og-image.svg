@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ablation Tests - social preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0f14"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="68" y="58" width="1064" height="514" rx="22" fill="#161b22" stroke="#30363d"/>
+
+  <text x="112" y="156" fill="#58a6ff" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Ablation Tests</text>
+  <text x="112" y="210" fill="#e6edf3" font-size="45" font-family="Segoe UI, Arial, sans-serif">Rank component variants under variance</text>
+
+  <!-- Left panel: wrong path (red) -->
+  <g transform="translate(112,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="#0f1725" stroke="#30363d"/>
+    <!-- Branch to top child (gray, not taken) -->
+    <line x1="102" y1="122" x2="339" y2="76" stroke="#30363d" stroke-width="3" stroke-linecap="round"/>
+    <!-- Branch to bottom child (red, wrong path) -->
+    <line x1="102" y1="130" x2="339" y2="176" stroke="#f85149" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Top child (dim, not reached) -->
+    <circle cx="360" cy="72" r="22" fill="#161b22" stroke="#30363d" stroke-width="3"/>
+    <!-- Bottom child (red, wrong destination) -->
+    <circle cx="360" cy="180" r="22" fill="#2d1117" stroke="#f85149" stroke-width="3.5"/>
+    <!-- Root node -->
+    <circle cx="80" cy="126" r="22" fill="#1c2d3f" stroke="#58a6ff" stroke-width="3"/>
+    <!-- X mark -->
+    <line x1="350" y1="170" x2="370" y2="190" stroke="#f85149" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="370" y1="170" x2="350" y2="190" stroke="#f85149" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Right panel: correct path (green) -->
+  <g transform="translate(624,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="#0f1725" stroke="#30363d"/>
+    <!-- Branch to top child (green, correct path) -->
+    <line x1="102" y1="122" x2="339" y2="76" stroke="#3fb950" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Branch to bottom child (gray, not taken) -->
+    <line x1="102" y1="130" x2="339" y2="176" stroke="#30363d" stroke-width="3" stroke-linecap="round"/>
+    <!-- Top child (green, best destination) -->
+    <circle cx="360" cy="72" r="22" fill="#0d2818" stroke="#3fb950" stroke-width="3.5"/>
+    <!-- Root node -->
+    <circle cx="80" cy="126" r="22" fill="#1c2d3f" stroke="#58a6ff" stroke-width="3"/>
+    <!-- Checkmark -->
+    <polyline points="348,72 358,83 374,59" fill="none" stroke="#3fb950" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Bottom child (dim, not taken) -->
+    <circle cx="360" cy="180" r="22" fill="#161b22" stroke="#30363d" stroke-width="3"/>
+  </g>
+</svg>

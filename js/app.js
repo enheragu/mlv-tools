@@ -17,17 +17,15 @@
       key: 'ablationTests',
       section: 'mlv-tools',
       href: '/mlv-tools/ablation-tests/',
-      imageDark: '/mlv-tools/assets/og-image.svg',
-      imageLight: '/mlv-tools/assets/og-image.svg',
-      status: 'wip'
+      imageDark: '/mlv-tools/ablation-tests/assets/og-image.svg',
+      imageLight: '/mlv-tools/ablation-tests/assets/og-image-light.svg'
     },
     {
       key: 'standardizingComparisons',
       section: 'mlv-tools',
       href: '/mlv-tools/standardizing-comparisons/',
-      imageDark: '/mlv-tools/assets/og-image.svg',
-      imageLight: '/mlv-tools/assets/og-image.svg',
-      status: 'wip'
+      imageDark: '/mlv-tools/standardizing-comparisons/assets/og-image.svg',
+      imageLight: '/mlv-tools/standardizing-comparisons/assets/og-image-light.svg'
     }
   ];
 

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Standardizing Comparisons light preview">
+  <style>
+    :root {
+      --c-bg-1:    #f7fbff;
+      --c-bg-2:    #edf3fb;
+      --c-surface: #ffffff;
+      --c-card:    #f8fbff;
+      --c-border:  #cfd8e3;
+      --c-blue:    #2f81f7;
+      --c-green:   #3fb950;
+      --c-amber:   #9a6700;
+      --c-text:    #1e293b;
+    }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#edf3fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="68" y="58" width="1064" height="514" rx="22" fill="var(--c-surface)" stroke="var(--c-border)"/>
+
+  <text x="112" y="156" fill="var(--c-blue)" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Standardizing Comparisons</text>
+  <text x="112" y="210" fill="var(--c-text)" font-size="45" font-family="Segoe UI, Arial, sans-serif">Align metrics before comparing models</text>
+
+  <!-- Left panel: before standardization — amber dashed starts mid-panel -->
+  <g transform="translate(112,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <path d="M 20 20 C 80 20, 150 20, 220 126 C 280 232, 380 232, 440 232" fill="none" stroke="var(--c-blue)"  stroke-width="4" stroke-linecap="round"/>
+    <path d="M 20 90 C 80 90, 150 130, 240 172 C 310 210, 380 232, 440 232" fill="none" stroke="var(--c-amber)" stroke-width="4" stroke-linecap="round" stroke-dasharray="14 9"/>
+  </g>
+
+  <!-- Right panel: after standardization — both aligned from same origin -->
+  <g transform="translate(624,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <path d="M 20 20 C 80 20, 150 20, 220 126 C 280 232, 380 232, 440 232" fill="none" stroke="var(--c-blue)"  stroke-width="4" stroke-linecap="round"/>
+    <path d="M 20 20 C 100 20, 200 60, 300 132 C 380 200, 430 232, 440 232" fill="none" stroke="var(--c-green)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

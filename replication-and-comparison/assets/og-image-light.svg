@@ -1,4 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Replication and Comparison light preview">
+  <style>
+    :root {
+      --c-bg-1:    #f7fbff;
+      --c-bg-2:    #edf3fb;
+      --c-surface: #ffffff;
+      --c-card:    #f8fbff;
+      --c-border:  #cfd8e3;
+      --c-blue:    #2f81f7;
+      --c-green:   #3fb950;
+      --c-text:    #1e293b;
+      --c-subtext: #475569;
+    }
+  </style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#f7fbff"/>
@@ -7,26 +20,24 @@
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect x="68" y="58" width="1064" height="514" rx="22" fill="#ffffff" stroke="#cfd8e3"/>
+  <rect x="68" y="58" width="1064" height="514" rx="22" fill="var(--c-surface)" stroke="var(--c-border)"/>
 
-  <text x="112" y="156" fill="#2f81f7" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Replication and Comparison</text>
-  <text x="112" y="210" fill="#1e293b" font-size="45" font-family="Segoe UI, Arial, sans-serif">Variance overlap and rank inversion</text>
+  <text x="112" y="156" fill="var(--c-blue)" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Replication and Comparison</text>
+  <text x="112" y="210" fill="var(--c-text)" font-size="45" font-family="Segoe UI, Arial, sans-serif">Variance overlap and rank inversion</text>
 
+  <!-- Left panel: bar chart (symmetric, same width as right) -->
   <g transform="translate(112,264)">
-    <rect x="0" y="0" width="455" height="252" rx="16" fill="#f8fbff" stroke="#cfd8e3"/>
-    <line x1="168" y1="220" x2="168" y2="158" stroke="#3fb950" stroke-width="4"/>
-    <line x1="290" y1="220" x2="290" y2="104" stroke="#2f81f7" stroke-width="4"/>
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <line x1="168" y1="220" x2="168" y2="158" stroke="var(--c-green)" stroke-width="4"/>
+    <line x1="296" y1="220" x2="296" y2="104" stroke="var(--c-blue)"  stroke-width="4"/>
   </g>
 
-  <g transform="translate(617,264)">
-    <rect x="0" y="0" width="495" height="252" rx="16" fill="#f8fbff" stroke="#cfd8e3"/>
-
-    <path d="M 40 216 C 105 216, 153 46, 201 46 C 250 46, 298 216, 363 216" fill="none" stroke="#2f81f7" stroke-width="4" stroke-linecap="round"/>
-
-    <path d="M 121 216 C 201 216, 218 100, 290 100 C 363 100, 379 216, 460 216" fill="none" stroke="#3fb950" stroke-width="4" stroke-linecap="round"/>
-
-    <line x1="193" y1="216" x2="193" y2="174" stroke="#3fb950" stroke-width="3.5" opacity="0.85"/>
-
-    <line x1="274" y1="216" x2="274" y2="127" stroke="#2f81f7" stroke-width="3.5" opacity="0.85"/>
+  <!-- Right panel: overlapping bell curves (margin-fixed) -->
+  <g transform="translate(624,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <path d="M 38 216 C 98 216, 143 46, 188 46 C 234 46, 279 216, 340 216" fill="none" stroke="var(--c-blue)"  stroke-width="4" stroke-linecap="round"/>
+    <path d="M 113 216 C 188 216, 204 100, 272 100 C 340 100, 355 216, 431 216" fill="none" stroke="var(--c-green)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="181" y1="216" x2="181" y2="174" stroke="var(--c-green)" stroke-width="3.5" opacity="0.8"/>
+    <line x1="257" y1="216" x2="257" y2="127" stroke="var(--c-blue)"  stroke-width="3.5" opacity="0.8"/>
   </g>
 </svg>

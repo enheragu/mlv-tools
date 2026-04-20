@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="ML Variance Analysis Tools light preview">
+  <style>
+    :root {
+      --c-bg-1:        #f7fbff;
+      --c-bg-2:        #edf3fb;
+      --c-surface:     #ffffff;
+      --c-card:        #f8fbff;
+      --c-border:      #cfd8e3;
+      --c-blue:        #2f81f7;
+      --c-green:       #3fb950;
+      --c-text:        #1e293b;
+      --c-node-root:   #dbeafe;
+      --c-node-green:  #dcfce7;
+      --c-node-dim:    #e2e8f0;
+      --c-line-dim:    #94a3b8;
+    }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#edf3fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="68" y="58" width="1064" height="514" rx="22" fill="var(--c-surface)" stroke="var(--c-border)"/>
+
+  <text x="112" y="156" fill="var(--c-blue)" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">ML Variance Analysis Tools</text>
+  <text x="112" y="210" fill="var(--c-text)" font-size="45" font-family="Segoe UI, Arial, sans-serif">Machine learning variance analysis tools</text>
+
+  <!-- Card 1: Replication and Comparison -->
+  <g transform="translate(112,264)">
+    <rect x="0" y="0" width="312" height="252" rx="12" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <text x="24" y="52" fill="var(--c-text)" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Replication</text>
+    <path d="M 20 228 C 58 228, 86 82, 120 82 C 154 82, 182 228, 220 228" fill="none" stroke="var(--c-blue)" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 56 228 C 92 228, 110 120, 155 120 C 200 120, 218 228, 260 228" fill="none" stroke="var(--c-green)" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="120" y1="228" x2="120" y2="149" stroke="var(--c-green)" stroke-width="3" opacity="0.7"/>
+    <line x1="155" y1="228" x2="155" y2="122" stroke="var(--c-blue)"  stroke-width="3" opacity="0.7"/>
+  </g>
+
+  <!-- Card 2: Ablation Tests -->
+  <g transform="translate(444,264)">
+    <rect x="0" y="0" width="312" height="252" rx="12" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <text x="24" y="52" fill="var(--c-text)" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Ablation Tests</text>
+    <line x1="91" y1="148" x2="217" y2="107" stroke="var(--c-green)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="91" y1="162" x2="217" y2="203" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="238" cy="100" r="22" fill="var(--c-node-green)" stroke="var(--c-green)" stroke-width="3"/>
+    <circle cx="238" cy="210" r="22" fill="var(--c-node-dim)" stroke="var(--c-line-dim)" stroke-width="3"/>
+    <circle cx="70" cy="155" r="22" fill="var(--c-node-root)" stroke="var(--c-blue)" stroke-width="3"/>
+  </g>
+
+  <!-- Card 3: Standardizing Comparisons -->
+  <g transform="translate(776,264)">
+    <rect x="0" y="0" width="312" height="252" rx="12" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <text x="24" y="52" fill="var(--c-text)" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Standardizing</text>
+    <path d="M 22 78 C 65 78, 100 78, 148 155 C 196 230, 255 234, 288 234" fill="none" stroke="var(--c-blue)" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 22 78 C 80 78, 160 98, 210 155 C 260 210, 285 234, 288 234" fill="none" stroke="var(--c-green)" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+</svg>
