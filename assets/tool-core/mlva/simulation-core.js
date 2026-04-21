@@ -36,16 +36,18 @@
   }
 
   async function requestAnalysis(options) {
-    var apiBase = String((options && options.apiBaseUrl) || 'http://localhost:8010').replace(/\/$/, '');
-    var endpoint = apiBase + '/api/analysis';
-    var timeoutMs = Number(options && options.timeoutMs) || 25000;
     var payload = buildApiPayload(options || {});
+    var apiBaseUrl = options && options.apiBaseUrl;
 
+    if (!apiBaseUrl) {
+      if (!window.PyodideAnalysis) throw new Error('PyodideAnalysis not loaded');
+      return await window.PyodideAnalysis.analyze(payload);
+    }
+
+    var endpoint = String(apiBaseUrl).replace(/\/$/, '') + '/api/analysis';
+    var timeoutMs = Number(options && options.timeoutMs) || 25000;
     var controller = new AbortController();
-    var timeoutId = setTimeout(function () {
-      controller.abort();
-    }, timeoutMs);
-
+    var timeoutId = setTimeout(function () { controller.abort(); }, timeoutMs);
     try {
       var res = await fetch(endpoint, {
         method: 'POST',
@@ -53,7 +55,6 @@
         body: JSON.stringify(payload),
         signal: controller.signal,
       });
-
       if (!res.ok) throw new Error('API analysis request failed');
       return await res.json();
     } finally {

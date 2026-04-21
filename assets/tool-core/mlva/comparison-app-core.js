@@ -290,8 +290,7 @@ console.log('[comparison-app-core.js] Script loaded and running');
     function getApiBaseUrl() {
       var params = new URLSearchParams(window.location.search || '');
       var fromQuery = (params.get('apiBase') || '').trim();
-      if (fromQuery) return fromQuery.replace(/\/$/, '');
-      return 'http://localhost:8010';
+      return fromQuery ? fromQuery.replace(/\/$/, '') : null;
     }
 
     function getPresetMetrics() {
