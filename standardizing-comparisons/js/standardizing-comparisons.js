@@ -1191,6 +1191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var chart = samplingErrorCharts[chartKey];
         if (!chart) return;
         var origUpdate = chart.update.bind(chart);
+        chart._directUpdate = origUpdate;
         chart.update = function (mode) {
           origUpdate(mode);
           syncX(chartKey, peerKey);
@@ -1226,7 +1227,7 @@ document.addEventListener('DOMContentLoaded', function () {
               if (wA && typeof orig.backgroundColor === 'string') ds.backgroundColor = wA(orig.backgroundColor, 0.22);
             }
           });
-          chart.update('none');
+          (chart._directUpdate || chart.update)('none');
         });
       });
     }
