@@ -212,7 +212,8 @@
         window.SharedChartInteractions.attach({
           canvas: canvas,
           getChart: function () { return interactionCharts[canvasId]; },
-          defaults: { yMin: yMin, yMax: yMax, mode: 'y' }
+          defaults: { yMin: yMin, yMax: yMax, mode: 'y' },
+          readonly: true
         });
       }
 

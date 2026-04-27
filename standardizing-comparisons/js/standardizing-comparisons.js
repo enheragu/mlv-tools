@@ -322,7 +322,8 @@ document.addEventListener('DOMContentLoaded', function () {
           getChart: () => chart,
           defaults: {
             xMin: 0, xMax: 100, yMin: 0, mode: 'y'
-          }
+          },
+          readonly: true
         });
       }
       // Clear any previous error status on successful render

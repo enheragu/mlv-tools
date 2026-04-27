@@ -2363,6 +2363,11 @@ console.log('[comparison-app-core.js] Script loaded and running');
         window.SharedUiCore.setLangSwitcherState(state.lang, '#lang-switcher');
       }
 
+      var presetTabsEl = document.getElementById('preset-tabs');
+      if (presetTabsEl && copy.presetLabel) presetTabsEl.setAttribute('aria-label', copy.presetLabel);
+      var metricTabsEl = document.getElementById('metric-tabs');
+      if (metricTabsEl && copy.metricLabel) metricTabsEl.setAttribute('aria-label', copy.metricLabel);
+
       renderPresetTabs();
       renderMetricTabs();
       renderModelList();
