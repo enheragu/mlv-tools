@@ -2374,6 +2374,9 @@ console.log('[comparison-app-core.js] Script loaded and running');
       renderModelSummaryTable();
       renderChart();
       renderNormalityTable();
+      if (state.lastDecisionRows && state.lastDecisionRows.length) {
+        renderDecisionTree(state.lastDecisionRows, state.lastDecisionExpectedOrder || []);
+      }
     }
 
     function loadData() {
