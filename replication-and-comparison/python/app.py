@@ -205,6 +205,15 @@ def _simulate_decision_paths(
             p_step2_ok = float(step2_ok / total) if total > 0 else 0.0
             p_reach_ok = float(reach_ok / total) if total > 0 else 0.0
 
+            # Guarantee every possible start-factor value appears as a step2 option
+            # in each observed step1 bucket, even when the simulation never sampled it.
+            # Without this, near-zero probability paths are missing depending on the random seed.
+            for sk in list(step1_counts.keys()):
+                for val in factor_values[start_factor]:
+                    if val not in step2_counts[sk]:
+                        step2_counts[sk][val] = 0
+                    reach_counts[sk].setdefault(val, 0)
+
             branches: List[dict] = []
             for step1_key in sorted(step1_counts.keys()):
                 step1_count = step1_counts.get(step1_key, 0)

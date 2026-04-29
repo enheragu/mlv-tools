@@ -2144,8 +2144,12 @@ console.log('[comparison-app-core.js] Script loaded and running');
       var mcTrials = trials.mcTrials;
       var bsTrials = trials.bsTrials;
 
-      if (resultsSection) resultsSection.classList.remove('hidden');
-      if (resultsBlock) resultsBlock.classList.remove('hidden');
+      // In ablation mode, keep results hidden until the tree is ready so both
+      // appear together rather than the text showing before the tree renders above it.
+      if (resultsMode !== 'ablation') {
+        if (resultsSection) resultsSection.classList.remove('hidden');
+        if (resultsBlock) resultsBlock.classList.remove('hidden');
+      }
       if (output) {
         var tpl = copy.resultsSummary || 'Selected conditions: {count}. Trials: Monte Carlo={mcTrials}, Bootstrap={bsTrials}.';
         output.innerHTML = tpl
@@ -2174,6 +2178,8 @@ console.log('[comparison-app-core.js] Script loaded and running');
           setResultsTableMode('ablation', copy);
           tableBody.innerHTML = '';
           setMainResultsTableVisible(false);
+          if (resultsSection) resultsSection.classList.remove('hidden');
+          if (resultsBlock) resultsBlock.classList.remove('hidden');
           renderDecisionTree(decisionRows, apiResult && apiResult.expected_order);
           cacheCurrentSimulationResult(mcTrials, bsTrials);
           if (runBtn) runBtn.disabled = false;
