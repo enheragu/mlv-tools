@@ -12,17 +12,49 @@
   <text x="112" y="156" fill="#58a6ff" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Model &amp; Data Inspector</text>
   <text x="112" y="210" fill="#e6edf3" font-size="45" font-family="Segoe UI, Arial, sans-serif">Architecture and dataset reference</text>
 
-  <!-- Content panel -->
-  <rect x="112" y="264" width="976" height="252" rx="16" fill="#0f1725" stroke="#30363d"/>
+  <!-- ── Left panel: model inspection ── -->
+  <g transform="translate(112,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="#0f1725" stroke="#30363d"/>
+    <!-- Node chain -->
+    <circle cx="72"  cy="126" r="16" fill="#161b22" stroke="#30363d" stroke-width="3"/>
+    <line x1="88"  y1="126" x2="208" y2="126" stroke="#30363d" stroke-width="3" stroke-linecap="round"/>
+    <line x1="258" y1="126" x2="378" y2="126" stroke="#30363d" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="394" cy="126" r="16" fill="#161b22" stroke="#30363d" stroke-width="3"/>
+    <circle cx="232" cy="126" r="28" fill="#1c2d3f" stroke="#3fb950" stroke-width="4.5"/>
+    <!-- Magnifying glass -->
+    <circle cx="232" cy="126" r="72" fill="#58a6ff06" stroke="#58a6ff" stroke-width="6"/>
+    <line x1="285" y1="179" x2="332" y2="224" stroke="#58a6ff" stroke-width="12" stroke-linecap="round"/>
+  </g>
 
-  <!-- Node chain: input → model → output -->
-  <circle cx="270" cy="390" r="28" fill="#161b22" stroke="#30363d" stroke-width="3"/>
-  <line x1="298" y1="390" x2="572" y2="390" stroke="#30363d" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="600" cy="390" r="28" fill="#1c2d3f" stroke="#58a6ff" stroke-width="3.5"/>
-  <line x1="628" y1="390" x2="902" y2="390" stroke="#30363d" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="930" cy="390" r="28" fill="#161b22" stroke="#30363d" stroke-width="3"/>
+  <!-- ── Right panel: data inspection ── -->
+  <g transform="translate(624,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="#0f1725" stroke="#30363d"/>
 
-  <!-- Magnifying glass centred on the highlighted node -->
-  <circle cx="600" cy="390" r="110" fill="#58a6ff06" stroke="#58a6ff" stroke-width="7"/>
-  <line x1="680" y1="468" x2="756" y2="542" stroke="#58a6ff" stroke-width="14" stroke-linecap="round"/>
+    <!-- 4×3 grid of data sample cells -->
+    <!-- Row 0 (y=54): cols at x=122,180,238,296  — centers y=74 -->
+    <!-- col 0 outside lens -->
+    <rect x="122" y="54"  width="46" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <!-- col 1 inside lens (dist≈59) -->
+    <rect x="180" y="54"  width="46" height="40" rx="5" fill="#1c2d3f" stroke="#30363d" stroke-width="2"/>
+    <!-- col 2 inside lens (dist≈59) -->
+    <rect x="238" y="54"  width="46" height="40" rx="5" fill="#1c2d3f" stroke="#30363d" stroke-width="2"/>
+    <!-- col 3 outside lens -->
+    <rect x="296" y="54"  width="46" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+
+    <!-- Row 1 (y=106): centers y=126 -->
+    <rect x="122" y="106" width="46" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <rect x="180" y="106" width="46" height="40" rx="5" fill="#1c2d3f" stroke="#3fb950" stroke-width="3"/>
+    <rect x="238" y="106" width="46" height="40" rx="5" fill="#1c2d3f" stroke="#3fb950" stroke-width="3"/>
+    <rect x="296" y="106" width="46" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+
+    <!-- Row 2 (y=158): centers y=178 -->
+    <rect x="122" y="158" width="46" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <rect x="180" y="158" width="46" height="40" rx="5" fill="#1c2d3f" stroke="#30363d" stroke-width="2"/>
+    <rect x="238" y="158" width="46" height="40" rx="5" fill="#1c2d3f" stroke="#30363d" stroke-width="2"/>
+    <rect x="296" y="158" width="46" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+
+    <!-- Magnifying glass -->
+    <circle cx="232" cy="126" r="72" fill="#58a6ff06" stroke="#58a6ff" stroke-width="6"/>
+    <line x1="285" y1="179" x2="332" y2="224" stroke="#58a6ff" stroke-width="12" stroke-linecap="round"/>
+  </g>
 </svg>

@@ -1,16 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Model &amp; Data Inspector - social preview light">
   <style>
     :root {
-      --c-bg-1:      #f7fbff;
-      --c-bg-2:      #edf3fb;
-      --c-surface:   #ffffff;
-      --c-card:      #f8fbff;
-      --c-border:    #cfd8e3;
-      --c-blue:      #2f81f7;
-      --c-text:      #1e293b;
-      --c-node-root: #dbeafe;
-      --c-node-dim:  #e2e8f0;
-      --c-line-dim:  #94a3b8;
+      --c-bg-1:        #f7fbff;
+      --c-bg-2:        #edf3fb;
+      --c-surface:     #ffffff;
+      --c-card:        #f8fbff;
+      --c-border:      #cfd8e3;
+      --c-blue:        #2f81f7;
+      --c-text:        #1e293b;
+      --c-node-root:   #dbeafe;
+      --c-node-dim:    #e2e8f0;
+      --c-line-dim:    #94a3b8;
+      --c-green:       #3fb950;
     }
   </style>
   <defs>
@@ -26,17 +27,43 @@
   <text x="112" y="156" fill="var(--c-blue)" font-size="70" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Model &amp; Data Inspector</text>
   <text x="112" y="210" fill="var(--c-text)" font-size="45" font-family="Segoe UI, Arial, sans-serif">Architecture and dataset reference</text>
 
-  <!-- Content panel -->
-  <rect x="112" y="264" width="976" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
+  <!-- ── Left panel: model inspection ── -->
+  <g transform="translate(112,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
+    <!-- Node chain -->
+    <circle cx="72"  cy="126" r="16" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="3"/>
+    <line x1="88"  y1="126" x2="208" y2="126" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="258" y1="126" x2="378" y2="126" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="394" cy="126" r="16" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="3"/>
+    <circle cx="232" cy="126" r="28" fill="var(--c-node-root)" stroke="var(--c-green)"     stroke-width="4.5"/>
+    <!-- Magnifying glass -->
+    <circle cx="232" cy="126" r="72" fill="#2f81f706" stroke="var(--c-blue)" stroke-width="6"/>
+    <line x1="285" y1="179" x2="332" y2="224" stroke="var(--c-blue)" stroke-width="12" stroke-linecap="round"/>
+  </g>
 
-  <!-- Node chain: input → model → output -->
-  <circle cx="270" cy="390" r="28" fill="var(--c-node-dim)" stroke="var(--c-line-dim)" stroke-width="3"/>
-  <line x1="298" y1="390" x2="572" y2="390" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="600" cy="390" r="28" fill="var(--c-node-root)" stroke="var(--c-blue)" stroke-width="3.5"/>
-  <line x1="628" y1="390" x2="902" y2="390" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="930" cy="390" r="28" fill="var(--c-node-dim)" stroke="var(--c-line-dim)" stroke-width="3"/>
+  <!-- ── Right panel: data inspection ── -->
+  <g transform="translate(624,264)">
+    <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
 
-  <!-- Magnifying glass centred on the highlighted node -->
-  <circle cx="600" cy="390" r="110" fill="#2f81f706" stroke="var(--c-blue)" stroke-width="7"/>
-  <line x1="680" y1="468" x2="756" y2="542" stroke="var(--c-blue)" stroke-width="14" stroke-linecap="round"/>
+    <!-- 4×3 grid of data sample cells -->
+    <!-- Row 0 -->
+    <rect x="122" y="54"  width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
+    <rect x="180" y="54"  width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
+    <rect x="238" y="54"  width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
+    <rect x="296" y="54"  width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
+    <!-- Row 1 -->
+    <rect x="122" y="106" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
+    <rect x="180" y="106" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-green)"     stroke-width="3"/>
+    <rect x="238" y="106" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-green)"     stroke-width="3"/>
+    <rect x="296" y="106" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
+    <!-- Row 2 -->
+    <rect x="122" y="158" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
+    <rect x="180" y="158" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
+    <rect x="238" y="158" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
+    <rect x="296" y="158" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
+
+    <!-- Magnifying glass -->
+    <circle cx="232" cy="126" r="72" fill="#2f81f706" stroke="var(--c-blue)" stroke-width="6"/>
+    <line x1="285" y1="179" x2="332" y2="224" stroke="var(--c-blue)" stroke-width="12" stroke-linecap="round"/>
+  </g>
 </svg>
