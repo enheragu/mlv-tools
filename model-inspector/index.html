@@ -1,0 +1,82 @@
+---
+layout: tool_document
+compact_mode: true
+redirect_path: /mlv-tools/model-inspector
+meta_title: Model & Data Inspector — MLV Tools
+meta_description: Architecture diagrams, parameter counts, and dataset reference for the models evaluated in the ML variance analysis study.
+webapp_name: Model & Data Inspector
+webapp_description: Architecture diagrams, parameter counts, and dataset reference for each model in the study.
+header_title: Model & Data Inspector
+header_subtitle: Architecture and dataset reference
+intro_title: Model and dataset reference
+intro_text: Browse architecture details, parameter counts, and dataset information for the models evaluated in the variance analysis study.
+footer_report_enabled: true
+footer_report_label: Report problem
+footer_credits_html: |
+  <p>Author: <a href="https://enheragu.github.io/" target="_blank" rel="noopener noreferrer">Enrique Heredia-Aguado</a></p>
+project: mlv-tools
+og_image: /mlv-tools/model-inspector/assets/og-image.svg
+og_image_alt: Model & Data Inspector preview
+custom_css:
+  - /mlv-tools/assets/tool-core/mlva/comparison-shell.css
+  - /tool-pages-theme/assets/shared/gallery-primitives.css
+  - /tool-pages-theme/assets/shared/lightbox-stage.css
+  - css/style.css
+custom_js:
+  - /mlv-tools/assets/tool-core/mlva/ui-core.js
+  - /mlv-tools/assets/tool-core/mlva/page-shell.js
+  - /mlv-tools/assets/tool-core/mlva/comparison-i18n-core.js
+  - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
+  - /mlv-tools/assets/publications-config.js
+  - js/i18n.js
+  - js/app.js
+---
+<!--THEME_BODY-->
+  <div class="content-shell">
+
+    <section class="shared-tabbed-stack shared-tabbed-shell shared-tabbed-shell-lg shared-tabbed-shell-strip">
+      <div id="preset-tabs" class="shared-tablist shared-tablist-joined shared-tablist-fill" role="tablist" aria-label="Use-case preset"></div>
+      <div class="shared-tabbed-panel">
+        <main class="inspector-main">
+          <section id="model-table-section" class="inspector-section"></section>
+          <section id="dataset-info-section" class="inspector-section"></section>
+        </main>
+      </div>
+    </section>
+
+    <div id="inspector-lightbox" class="lightbox" aria-modal="true" role="dialog">
+      <div class="shared-corner-controls">
+        <button id="inspector-lb-close" class="lightbox-close shared-icon-btn shared-close-btn" aria-label="Close" title="Close">
+          <span aria-hidden="true" class="icon-close">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="lightbox-stage shared-lightbox-stage" id="inspector-lb-stage">
+        <button id="inspector-lb-prev" class="lightbox-nav lightbox-prev shared-icon-btn shared-nav-btn" aria-label="Previous image" title="Previous image">
+          <span aria-hidden="true" class="icon-arrow icon-arrow-left">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false"><path d="M14.5 6 8.5 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+        <img id="inspector-lb-img" class="lightbox-content shared-lightbox-media shared-lightbox-frame" alt="">
+        <button id="inspector-lb-next" class="lightbox-nav lightbox-next shared-icon-btn shared-nav-btn" aria-label="Next image" title="Next image">
+          <span aria-hidden="true" class="icon-arrow icon-arrow-right">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false"><path d="M9.5 6 15.5 12l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+      </div>
+      <div id="inspector-lb-caption" class="lightbox-caption"></div>
+      <div id="inspector-lb-counter" class="lightbox-counter"></div>
+    </div>
+
+    <div id="diagram-modal-overlay" class="chart-modal-overlay hidden" onclick="event.target===this&&window.ModelInspectorApp&&window.ModelInspectorApp.closeDiagramModal()">
+      <div class="chart-modal diagram-modal" onclick="event.stopPropagation()">
+        <div class="chart-modal-head">
+          <h3 id="diagram-modal-title" class="shared-plot-modal-title">Architecture diagram</h3>
+          <button id="btn-close-diagram" class="btn-outline btn-chart-close" type="button" onclick="window.ModelInspectorApp&&window.ModelInspectorApp.closeDiagramModal()">Close</button>
+        </div>
+        <div id="diagram-modal-content" class="diagram-modal-content"></div>
+      </div>
+    </div>
+
+  </div>

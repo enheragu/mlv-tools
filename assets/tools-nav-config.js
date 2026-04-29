@@ -14,6 +14,7 @@
       {
         title: { en: 'ML variance analysis', es: 'Análisis de varianza ML' },
         items: [
+          { href: '/mlv-tools/model-inspector/', label: { en: 'Model & Data Inspector', es: 'Inspector de Modelos y Datos' } },
           { href: '/mlv-tools/replication-and-comparison/', label: { en: 'Replication and Comparison', es: 'Replication and Comparison' } },
           { href: '/mlv-tools/ablation-tests/', label: { en: 'Ablation Tests', es: 'Ablation Tests' } },
           { href: '/mlv-tools/standardizing-comparisons/', label: { en: 'Standardizing Comparisons', es: 'Standardizing Comparisons' } }

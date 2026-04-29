@@ -47,6 +47,7 @@
   },
   "tools": {
     "Landing": {},
+    "ModelInspector": { "category_id": "mlv-tools" },
     "ReplicationAndComparison": { "category_id": "mlv-tools" },
     "AblationTests": { "category_id": "mlv-tools" },
     "StandardizingComparisons": { "category_id": "mlv-tools" }

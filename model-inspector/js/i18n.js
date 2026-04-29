@@ -1,0 +1,57 @@
+(function () {
+  if (window.ModelInspectorI18n) return;
+  window.ModelInspectorI18n = window.StatMlvaComparisonI18nCore.create({
+    overrides: {
+      en: {
+        pageTitle: 'Model & Data Inspector — MLV Tools',
+        subtitle: 'Architecture and dataset reference for each model',
+        introTitle: 'Model and dataset reference',
+        introText: 'Browse architecture details, parameter counts, and dataset information for the models evaluated in the variance analysis study.',
+        modelTableTitle: 'Model overview',
+        colModel: 'Model',
+        colType: 'Type',
+        colLayers: 'Layers',
+        colParams: 'Parameters',
+        colMemory: 'Memory',
+        colArch: 'Architecture',
+        viewDiagram: 'View',
+        externalDocs: 'Docs',
+        diagramTitle: 'Architecture diagram',
+        diagramClose: 'Close',
+        diagramLoading: 'Rendering diagram…',
+        datasetTitle: 'Dataset',
+        citationLabel: 'Citation',
+        sampleImagesTitle: 'Sample images',
+        sampleImagesPlaceholder: 'Sample images coming soon.',
+        kaistDay: 'Day',
+        kaistNight: 'Night',
+        detectionModelNote: 'YOLOv8 was evaluated with multiple image fusion strategies (early, midpoint, and late fusion) applied to RGB–LWIR image pairs from the KAIST dataset.',
+      },
+      es: {
+        pageTitle: 'Inspecto de Modelos y Datos — MLV Tools',
+        subtitle: 'Referencia de arquitectura y dataset para cada modelo',
+        introTitle: 'Referencia de modelos y datasets',
+        introText: 'Consulta detalles de arquitectura, conteo de parámetros e información de los datasets utilizados en el estudio de análisis de varianza.',
+        modelTableTitle: 'Resumen de modelos',
+        colModel: 'Modelo',
+        colType: 'Tipo',
+        colLayers: 'Capas',
+        colParams: 'Parámetros',
+        colMemory: 'Memoria',
+        colArch: 'Arquitectura',
+        viewDiagram: 'Ver',
+        externalDocs: 'Docs',
+        diagramTitle: 'Diagrama de arquitectura',
+        diagramClose: 'Cerrar',
+        diagramLoading: 'Generando diagrama…',
+        datasetTitle: 'Dataset',
+        citationLabel: 'Cita',
+        sampleImagesTitle: 'Imágenes de ejemplo',
+        sampleImagesPlaceholder: 'Imágenes de ejemplo próximamente.',
+        kaistDay: 'Día',
+        kaistNight: 'Noche',
+        detectionModelNote: 'YOLOv8 fue evaluado con múltiples estrategias de fusión de imagen (early, midpoint y late fusion) aplicadas a pares de imágenes RGB–LWIR del dataset KAIST.',
+      }
+    }
+  });
+})();

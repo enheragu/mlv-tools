@@ -12,6 +12,10 @@
       reportProblem: 'Report problem',
       toggleTheme: 'Toggle theme',
       cards: {
+        modelInspector: {
+          title: 'Model & Data Inspector',
+          desc: 'Browse architecture diagrams, parameter counts, and dataset reference for every model evaluated in the study.'
+        },
         replicationComparison: {
           title: 'Replication and Comparison',
           desc: 'Compare repeated-run metric distributions, inspect fitted normals, and estimate rank inversion probabilities under single-run sampling.'
@@ -36,6 +40,10 @@
       reportProblem: 'Reportar problema',
       toggleTheme: 'Cambiar tema',
       cards: {
+        modelInspector: {
+          title: 'Model & Data Inspector',
+          desc: 'Consulta diagramas de arquitectura, conteo de parámetros y referencia del dataset para cada modelo evaluado en el estudio.'
+        },
         replicationComparison: {
           title: 'Replication and Comparison',
           desc: 'Compara distribuciones de métricas en repeticiones, inspecciona normales ajustadas y estima probabilidades de inversión de ranking en una sola corrida.'

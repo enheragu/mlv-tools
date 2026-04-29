@@ -7,6 +7,13 @@
 
   var tools = [
     {
+      key: 'modelInspector',
+      section: 'mlv-tools',
+      href: '/mlv-tools/model-inspector/',
+      imageDark: '/mlv-tools/model-inspector/assets/og-image.svg',
+      imageLight: '/mlv-tools/model-inspector/assets/og-image-light.svg'
+    },
+    {
       key: 'replicationComparison',
       section: 'mlv-tools',
       href: '/mlv-tools/replication-and-comparison/',

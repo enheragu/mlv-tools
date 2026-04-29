@@ -1,6 +1,12 @@
 {
   "tools": [
     {
+      "key": "modelInspector",
+      "href": "/mlv-tools/model-inspector/",
+      "imageDark": "/mlv-tools/model-inspector/assets/og-image.svg",
+      "imageLight": "/mlv-tools/model-inspector/assets/og-image-light.svg"
+    },
+    {
       "key": "replicationComparison",
       "href": "/mlv-tools/replication-and-comparison/",
       "imageDark": "/mlv-tools/replication-and-comparison/assets/og-image.svg",
