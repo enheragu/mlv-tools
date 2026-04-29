@@ -153,8 +153,6 @@
     Linear_fc1("<b>Linear</b>(784, 10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Linear_fc1
     Linear_fc1 --> output`,
@@ -165,8 +163,6 @@
     Linear_fc2("<b>Linear</b>(800, 10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Linear_fc1
     Linear_fc1 --> Linear_fc2
@@ -182,8 +178,6 @@
     Linear_fc6("<b>Linear</b>(500, 10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Linear_fc1
     Linear_fc1 --> Linear_fc2
@@ -202,8 +196,6 @@
     Linear_0("<b>Linear</b>(3200, 10); <b>BatchNorm1d</b>(10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Conv2d_0
     Conv2d_0 --> MaxPool2d_3
@@ -222,8 +214,6 @@
     Linear_2("<b>Linear</b>(100, 10); <b>BatchNorm1d</b>(10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Conv2d_0
     Conv2d_0 --> MaxPool2d_3
@@ -244,8 +234,6 @@
     Linear_0("<b>Linear</b>(2048, 10); <b>BatchNorm1d</b>(10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Conv2d_0
     Conv2d_0 --> Conv2d_3
@@ -261,18 +249,16 @@
     Conv2d_0("<b>Conv2d</b>((3, 3), 64ch); <b>BatchNorm2d</b>(64); <b>ReLU</b>"):::blockStyle
     Conv2d_3("<b>Conv2d</b>((3, 3), 128ch); <b>BatchNorm2d</b>(128); <b>ReLU</b>"):::blockStyle
     MaxPool2d_6("<b>MaxPool2d</b>(2)"):::blockStyle
-    subgraph subgraph_4 [" "]
-        subgraph_4_count("<b>x4</b>"):::noBox
+    subgraph subgraph_4 ["× 4"]
         subgraph_4_block("<b>Conv2d</b>((3, 3), 128ch); <b>BatchNorm2d</b>(128); <b>ReLU</b>"):::blockStyle
     end
-    style subgraph_4 fill:#a664974D,stroke:#a66497,stroke-width:2px,rx:10px,ry:10px
+    style subgraph_4 rx:10px,ry:10px
     Conv2d_19("<b>Conv2d</b>((3, 3), 256ch); <b>BatchNorm2d</b>(256); <b>ReLU</b>"):::blockStyle
     MaxPool2d_22("<b>MaxPool2d</b>(2)"):::blockStyle
-    subgraph subgraph_10 [" "]
-        subgraph_10_count("<b>x2</b>"):::noBox
+    subgraph subgraph_10 ["× 2"]
         subgraph_10_block("<b>Conv2d</b>((3, 3), 256ch); <b>BatchNorm2d</b>(256); <b>ReLU</b>"):::blockStyle
     end
-    style subgraph_10 fill:#a664974D,stroke:#a66497,stroke-width:2px,rx:10px,ry:10px
+    style subgraph_10 rx:10px,ry:10px
     Conv2d_29("<b>Conv2d</b>((3, 3), 512ch); <b>BatchNorm2d</b>(512); <b>ReLU</b>"):::blockStyle
     Conv2d_32("<b>Conv2d</b>((1, 1), 2048ch); <b>BatchNorm2d</b>(2048); <b>ReLU</b>"):::blockStyle
     Conv2d_35("<b>Conv2d</b>((1, 1), 256ch); <b>BatchNorm2d</b>(256); <b>ReLU</b>"):::blockStyle
@@ -281,8 +267,6 @@
     Linear_0("<b>Linear</b>(256, 10)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Conv2d_0
     Conv2d_0 --> Conv2d_3
@@ -324,8 +308,6 @@
     drop_b3("<b>Dropout</b>(0.0)"):::blockStyle
     output("Output (10)"):::noBox
 
-    classDef blockStyle fill:#0171ba4D,stroke:#0171ba,stroke-width:2px
-    classDef noBox fill:none,stroke:none;
 
     input_image --> Conv2d_b1
     Conv2d_b1 --> mlp1_b1_conv
@@ -383,16 +365,59 @@
 
   function isDark() {
     return document.body.classList.contains('dark') ||
-      document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.getAttribute('data-theme') === 'dark' ||
+      localStorage.getItem('theme') === 'dark';
   }
 
   // ============================================================
   // MERMAID
   // ============================================================
 
-  function mermaidTheme() {
-    return isDark() ? 'dark' : 'default';
-  }
+  // All colors from theme-tokens.css:
+  // --pal-blue=#58a6ff, --pal-purple=#bc8cff, --pal-gray=#6e7681
+  // --clr-text light=#3a4658 dark=#e6edf3 / --clr-bg light=#f4f6f9 dark=#0d1117
+  var MERMAID_VARS = {
+    light: {
+      primaryColor:        '#58a6ff22',
+      primaryTextColor:    '#3a4658',
+      primaryBorderColor:  '#58a6ff',
+      lineColor:           '#6e7681',
+      background:          '#f4f6f9',
+      mainBkg:             '#58a6ff22',
+      nodeBorder:          '#58a6ff',
+      clusterBkg:          '#3fb95022',
+      clusterBorder:       '#3fb950',
+      titleColor:          '#3a4658',
+      edgeLabelBackground: '#f4f6f9',
+      fontFamily:          'ui-sans-serif, system-ui, sans-serif'
+    },
+    dark: {
+      primaryColor:        '#58a6ff22',
+      primaryTextColor:    '#e6edf3',
+      primaryBorderColor:  '#58a6ff',
+      lineColor:           '#6e7681',
+      background:          '#0d1117',
+      mainBkg:             '#58a6ff22',
+      nodeBorder:          '#58a6ff',
+      clusterBkg:          '#3fb95022',
+      clusterBorder:       '#3fb950',
+      titleColor:          '#e6edf3',
+      edgeLabelBackground: '#161b22',
+      fontFamily:          'ui-sans-serif, system-ui, sans-serif'
+    }
+  };
+
+  // classDef blockStyle overrides per-node; noBox removes fill/stroke for label nodes
+  var CLASSDEFS = {
+    light: [
+      'classDef blockStyle fill:#58a6ff22,stroke:#58a6ff,stroke-width:2px,color:#3a4658,font-weight:normal',
+      'classDef noBox fill:none,stroke:none,color:#3a4658,font-weight:normal'
+    ],
+    dark: [
+      'classDef blockStyle fill:#58a6ff22,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,font-weight:normal',
+      'classDef noBox fill:none,stroke:none,color:#e6edf3,font-weight:normal'
+    ]
+  };
 
   var diagramCounter = 0;
 
@@ -401,9 +426,13 @@
       container.textContent = 'Mermaid not loaded.';
       return;
     }
-    mermaid.initialize({ startOnLoad: false, theme: mermaidTheme(), securityLevel: 'loose' });
+    var dark  = isDark();
+    var tvars = dark ? MERMAID_VARS.dark  : MERMAID_VARS.light;
+    var defs  = dark ? CLASSDEFS.dark     : CLASSDEFS.light;
+    var initBlock = '%%{init: {"theme": "base", "themeVariables": ' + JSON.stringify(tvars) + '}}%%\n';
+    var themedSrc = initBlock + src + '\n' + defs[0] + '\n' + defs[1];
     var id = 'mi-diagram-' + (++diagramCounter);
-    mermaid.render(id, src).then(function (result) {
+    mermaid.render(id, themedSrc).then(function (result) {
       container.innerHTML = result.svg;
     }).catch(function (err) {
       container.textContent = 'Error rendering diagram.';
@@ -657,7 +686,7 @@
 
   function init() {
     if (window.mermaid) {
-      mermaid.initialize({ startOnLoad: false, theme: mermaidTheme(), securityLevel: 'loose' });
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
     }
 
     // Re-render mermaid on theme change
