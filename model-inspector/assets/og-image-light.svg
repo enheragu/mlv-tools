@@ -1,23 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Model &amp; Data Inspector - social preview light">
   <style>
     :root {
-      --c-bg-1:        #f7fbff;
-      --c-bg-2:        #edf3fb;
-      --c-surface:     #ffffff;
-      --c-card:        #f8fbff;
-      --c-border:      #cfd8e3;
-      --c-blue:        #2f81f7;
-      --c-text:        #1e293b;
-      --c-node-root:   #dbeafe;
-      --c-node-dim:    #e2e8f0;
-      --c-line-dim:    #94a3b8;
-      --c-green:       #3fb950;
+      --c-bg-1:       #f4f6f9;
+      --c-bg-2:       #e8ecf2;
+      --c-surface:    #ffffff;
+      --c-card:       #f4f6f9;
+      --c-border:     #dde1e7;
+      --c-text:       #3a4658;
+      --c-blue:       #58a6ff;
+      --c-green:      #3fb950;
+      --c-red:        #f85149;
+      --c-amber:      #d29922;
+      --c-gray:       #6e7681;
+      --c-purple:     #bc8cff;
+      --c-cyan:       #79c0ff;
+      --c-node-root:  #dbeafe;
+      --c-node-green: #dcfce7;
+      --c-node-red:   #fee2e2;
+      --c-node-dim:   #e2e8f0;
+      --c-line-dim:   #94a3b8;
     }
   </style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f7fbff"/>
-      <stop offset="100%" stop-color="#edf3fb"/>
+      <stop offset="0%" stop-color="var(--c-bg-1)"/>
+      <stop offset="100%" stop-color="var(--c-bg-2)"/>
     </linearGradient>
   </defs>
 
@@ -35,9 +42,9 @@
     <line x1="88"  y1="126" x2="208" y2="126" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
     <line x1="258" y1="126" x2="378" y2="126" stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
     <circle cx="394" cy="126" r="16" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="3"/>
-    <circle cx="232" cy="126" r="28" fill="var(--c-node-root)" stroke="var(--c-green)"     stroke-width="4.5"/>
+    <circle cx="232" cy="126" r="28" fill="var(--c-node-root)" stroke="var(--c-green)"    stroke-width="4.5"/>
     <!-- Magnifying glass -->
-    <circle cx="232" cy="126" r="72" fill="#2f81f706" stroke="var(--c-blue)" stroke-width="6"/>
+    <circle cx="232" cy="126" r="72" fill="#58a6ff06" stroke="var(--c-blue)" stroke-width="6"/>
     <line x1="285" y1="179" x2="332" y2="224" stroke="var(--c-blue)" stroke-width="12" stroke-linecap="round"/>
   </g>
 
@@ -48,22 +55,22 @@
     <!-- 4×3 grid of data sample cells -->
     <!-- Row 0 -->
     <rect x="122" y="54"  width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
-    <rect x="180" y="54"  width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
-    <rect x="238" y="54"  width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
+    <rect x="180" y="54"  width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)" stroke-width="2"/>
+    <rect x="238" y="54"  width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)" stroke-width="2"/>
     <rect x="296" y="54"  width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
     <!-- Row 1 -->
     <rect x="122" y="106" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
-    <rect x="180" y="106" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-green)"     stroke-width="3"/>
-    <rect x="238" y="106" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-green)"     stroke-width="3"/>
+    <rect x="180" y="106" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-green)"    stroke-width="3"/>
+    <rect x="238" y="106" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-green)"    stroke-width="3"/>
     <rect x="296" y="106" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
     <!-- Row 2 -->
     <rect x="122" y="158" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
-    <rect x="180" y="158" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
-    <rect x="238" y="158" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)"     stroke-width="2"/>
+    <rect x="180" y="158" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)" stroke-width="2"/>
+    <rect x="238" y="158" width="46" height="40" rx="5" fill="var(--c-node-root)" stroke="var(--c-line-dim)" stroke-width="2"/>
     <rect x="296" y="158" width="46" height="40" rx="5" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)" stroke-width="2"/>
 
     <!-- Magnifying glass -->
-    <circle cx="232" cy="126" r="72" fill="#2f81f706" stroke="var(--c-blue)" stroke-width="6"/>
+    <circle cx="232" cy="126" r="72" fill="#58a6ff06" stroke="var(--c-blue)" stroke-width="6"/>
     <line x1="285" y1="179" x2="332" y2="224" stroke="var(--c-blue)" stroke-width="12" stroke-linecap="round"/>
   </g>
 </svg>

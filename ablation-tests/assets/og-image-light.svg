@@ -1,26 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ablation Tests light preview">
   <style>
     :root {
-      --c-bg-1:         #f7fbff;
-      --c-bg-2:         #edf3fb;
-      --c-surface:      #ffffff;
-      --c-card:         #f8fbff;
-      --c-border:       #cfd8e3;
-      --c-blue:         #2f81f7;
-      --c-green:        #3fb950;
-      --c-red:          #d1242f;
-      --c-text:         #1e293b;
-      --c-line-dim:     #94a3b8;
-      --c-node-root:    #dbeafe;
-      --c-node-green:   #dcfce7;
-      --c-node-red:     #fee2e2;
-      --c-node-dim:     #e2e8f0;
+      --c-bg-1:       #f4f6f9;
+      --c-bg-2:       #e8ecf2;
+      --c-surface:    #ffffff;
+      --c-card:       #f4f6f9;
+      --c-border:     #dde1e7;
+      --c-text:       #3a4658;
+      --c-blue:       #58a6ff;
+      --c-green:      #3fb950;
+      --c-red:        #f85149;
+      --c-amber:      #d29922;
+      --c-gray:       #6e7681;
+      --c-purple:     #bc8cff;
+      --c-cyan:       #79c0ff;
+      --c-node-root:  #dbeafe;
+      --c-node-green: #dcfce7;
+      --c-node-red:   #fee2e2;
+      --c-node-dim:   #e2e8f0;
+      --c-line-dim:   #94a3b8;
     }
   </style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f7fbff"/>
-      <stop offset="100%" stop-color="#edf3fb"/>
+      <stop offset="0%" stop-color="var(--c-bg-1)"/>
+      <stop offset="100%" stop-color="var(--c-bg-2)"/>
     </linearGradient>
   </defs>
 
@@ -34,11 +38,11 @@
   <g transform="translate(112,264)">
     <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
     <circle cx="80" cy="126" r="22" fill="var(--c-node-root)" stroke="var(--c-blue)" stroke-width="3"/>
-    <line x1="102" y1="122" x2="339" y2="76"  stroke="var(--c-line-dim)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="102" y1="122" x2="339" y2="76"  stroke="var(--c-line-dim)" stroke-width="3"   stroke-linecap="round"/>
     <line x1="102" y1="130" x2="339" y2="176" stroke="var(--c-red)"      stroke-width="3.5" stroke-linecap="round"/>
     <circle cx="360" cy="72"  r="22" fill="var(--c-node-dim)" stroke="var(--c-line-dim)" stroke-width="3"/>
     <circle cx="360" cy="180" r="22" fill="var(--c-node-red)" stroke="var(--c-red)"      stroke-width="3.5"/>
-    <circle cx="80" cy="126" r="22" fill="var(--c-node-root)" stroke="var(--c-blue)" stroke-width="3"/>
+    <circle cx="80"  cy="126" r="22" fill="var(--c-node-root)" stroke="var(--c-blue)"   stroke-width="3"/>
     <line x1="350" y1="170" x2="370" y2="190" stroke="var(--c-red)" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="370" y1="170" x2="350" y2="190" stroke="var(--c-red)" stroke-width="2.5" stroke-linecap="round"/>
   </g>
@@ -46,11 +50,11 @@
   <!-- Right panel: correct path (green) -->
   <g transform="translate(624,264)">
     <rect x="0" y="0" width="464" height="252" rx="16" fill="var(--c-card)" stroke="var(--c-border)"/>
-    <line x1="102" y1="122" x2="339" y2="76"  stroke="var(--c-green)"    stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="102" y1="122" x2="339" y2="76"  stroke="var(--c-green)"   stroke-width="3.5" stroke-linecap="round"/>
     <line x1="102" y1="130" x2="339" y2="176" stroke="var(--c-line-dim)" stroke-width="3"   stroke-linecap="round"/>
-    <circle cx="360" cy="72"  r="22" fill="var(--c-node-green)" stroke="var(--c-green)"    stroke-width="3.5"/>
-    <circle cx="80" cy="126" r="22" fill="var(--c-node-root)"  stroke="var(--c-blue)"      stroke-width="3"/>
+    <circle cx="360" cy="72"  r="22" fill="var(--c-node-green)" stroke="var(--c-green)"   stroke-width="3.5"/>
+    <circle cx="80"  cy="126" r="22" fill="var(--c-node-root)"  stroke="var(--c-blue)"    stroke-width="3"/>
     <polyline points="348,72 358,83 374,59" fill="none" stroke="var(--c-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="360" cy="180" r="22" fill="var(--c-node-dim)"  stroke="var(--c-line-dim)"  stroke-width="3"/>
+    <circle cx="360" cy="180" r="22" fill="var(--c-node-dim)" stroke="var(--c-line-dim)" stroke-width="3"/>
   </g>
 </svg>

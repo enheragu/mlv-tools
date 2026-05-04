@@ -5,25 +5,31 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://enheragu.github.io/mlv-tools/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://enheragu.github.io/mlv-tools/?lang=en" />
     <xhtml:link rel="alternate" hreflang="es" href="https://enheragu.github.io/mlv-tools/?lang=es" />
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://enheragu.github.io/mlv-tools/replication-and-comparison/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://enheragu.github.io/mlv-tools/ablation-tests/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://enheragu.github.io/mlv-tools/standardizing-comparisons/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://enheragu.github.io/mlv-tools/model-inspector/</loc>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
