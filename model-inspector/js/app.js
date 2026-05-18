@@ -42,7 +42,7 @@
       citation: 'LeCun, Y., Bottou, L., Bengio, Y. &amp; Haffner, P. (1998). Gradient-Based Learning Applied to Document Recognition. <em>Proceedings of the IEEE</em>, 86(11), 2278–2324.',
       stats: [
         { label: 'Training samples', label_es: 'Muestras de entrenamiento', value: '60,000' },
-        { label: 'Test samples',     label_es: 'Muestras de test',          value: '10,000' },
+        { label: 'Test samples',     label_es: 'Muestras de validación',    value: '10,000' },
         { label: 'Image size',       label_es: 'Tamaño de imagen',          value: '28 × 28 px, grayscale' },
         { label: 'Classes',          label_es: 'Clases',                    value: '10 (digits 0–9)' },
         { label: 'Format',           label_es: 'Formato',                   value: 'Grayscale PNG / IDX binary' }
@@ -678,7 +678,18 @@
   // INIT
   // ============================================================
 
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el && value != null) el.textContent = value;
+  }
+
   function applyLanguage() {
+    var copy = getCopy();
+    if (copy) {
+      setText('site-subtitle', copy.subtitle);
+      setText('intro-title', copy.introTitle);
+      setText('intro-text', copy.introText);
+    }
     renderPresetTabs();
     renderTable();
     renderDatasetInfo();
