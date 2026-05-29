@@ -65,13 +65,6 @@
   width: 100%;
 }
 
-.sim-method-copy {
-  font-size: var(--txt-sm, .78rem);
-  color: var(--clr-muted);
-  line-height: var(--txt-lh-relaxed);
-  margin: 0;
-}
-
 .sim-config-block .stepper {
   margin-top: 0.35rem;
 }
@@ -132,22 +125,6 @@
   gap: 1rem;
 }
 
-.content-shell {
-  margin-bottom: .85rem;
-}
-
-.case-context-note {
-  margin: .5rem 0 1rem;
-  color: var(--clr-muted);
-  font-size: var(--txt-sm);
-  line-height: var(--txt-lh-relaxed);
-  width: 100%;
-}
-
-.intro-panel {
-  margin-bottom: 1rem;
-}
-
 #results-section {
   max-width: 1400px;
   margin: 0 auto 2rem;
@@ -189,12 +166,6 @@
   margin-top: .2rem;
 }
 
-.results-note {
-  margin: .45rem 0 0;
-  color: var(--txt-muted, var(--clr-muted));
-  font-size: var(--txt-sm, .79rem);
-}
-
 .mlva-model-with-swatch {
   display: inline-flex;
   align-items: center;
@@ -216,7 +187,7 @@
   align-items: center;
   border-radius: 999px;
   padding: .1rem .45rem;
-  font-size: var(--txt-xs);
+  font-size: var(--txt-md);
   font-weight: var(--txt-w-semibold, 600);
 }
 
@@ -230,17 +201,10 @@
   background: color-mix(in oklab, var(--clr-danger) 14%, transparent);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
   .summary-grid,
   .select-row {
     grid-template-columns: 1fr;
-  }
-
-  .case-context-note {
-    margin: .35rem 0 .7rem;
-    font-size: var(--txt-xs);
-    line-height: var(--txt-lh-body);
-    max-width: 100%;
   }
 
   .results-controls {

@@ -34,7 +34,7 @@
 .inspector-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: var(--txt-md);
   white-space: nowrap;
 }
 
@@ -101,7 +101,7 @@
 
 .inspector-model-note {
   margin: 0.85rem 0 0;
-  font-size: 0.85rem;
+  font-size: var(--txt-md);
   color: var(--clr-muted, #666);
   line-height: 1.5;
 }
@@ -112,7 +112,7 @@
 
 .inspector-dataset-fullname {
   margin: -0.4rem 0 0.9rem;
-  font-size: 0.85rem;
+  font-size: var(--txt-md);
   color: var(--clr-muted, #666);
 }
 
@@ -123,7 +123,7 @@
   align-items: start;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 42.5em) {
   .inspector-dataset-body {
     grid-template-columns: 1fr;
   }
@@ -132,7 +132,7 @@
 .inspector-stat-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: var(--txt-md);
 }
 
 .inspector-stat-table th,
@@ -157,7 +157,7 @@
 
 .inspector-citation {
   margin: 0.9rem 0 0;
-  font-size: 0.78rem;
+  font-size: var(--txt-xs);
   color: var(--clr-muted, #666);
   line-height: 1.5;
 }
@@ -165,13 +165,13 @@
 /* Sample images */
 .inspector-images-title {
   margin: 0 0 0.6rem;
-  font-size: 0.875rem;
+  font-size: var(--txt-md);
   font-weight: 600;
   color: var(--clr-heading, currentColor);
 }
 
 .inspector-images-placeholder {
-  font-size: 0.82rem;
+  font-size: var(--txt-sm);
   color: var(--clr-muted, #888);
   font-style: italic;
   margin: 0;
@@ -186,7 +186,7 @@
 }
 
 .sample-group-label {
-  font-size: 0.78rem;
+  font-size: var(--txt-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -201,7 +201,7 @@
   gap: 0.4rem;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30em) {
   .mnist-gallery { grid-template-columns: repeat(4, 1fr); }
 }
 
@@ -226,7 +226,7 @@
   aspect-ratio: 4 / 3;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 35em) {
   .kaist-pairs {
     grid-template-columns: 1fr;
   }
@@ -268,7 +268,7 @@
 }
 
 .diagram-loading {
-  font-size: 0.875rem;
+  font-size: var(--txt-md);
   color: var(--clr-muted, #888);
   margin: 2rem auto;
   text-align: center;

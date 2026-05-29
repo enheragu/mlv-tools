@@ -25,3 +25,19 @@ defaults:
       with_analysis_panels: true
       with_chart_interactions: true
       with_publication_ui: true
+  - scope:
+      path: "mlv-tools/model-inspector"
+    values:
+      header_supertitle: MLV Tools
+  - scope:
+      path: "mlv-tools/replication-and-comparison"
+    values:
+      header_supertitle: MLV Tools
+  - scope:
+      path: "mlv-tools/ablation-tests"
+    values:
+      header_supertitle: MLV Tools
+  - scope:
+      path: "mlv-tools/standardizing-comparisons"
+    values:
+      header_supertitle: MLV Tools

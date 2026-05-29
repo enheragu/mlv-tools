@@ -1,0 +1,52 @@
+---
+layout: tool_document
+compact_mode: true
+redirect_path: /mlv-tools/about
+meta_title: About — MLV Tools
+meta_description: MLV Tools is a companion to a methodological study on ML evaluation variance, developed within the ARVC research group at UMH.
+icon_href: /mlv-tools/assets/favicon.svg
+og_image: /mlv-tools/assets/og-image.png
+header_title: ML Variance Analysis Tools
+header_subtitle: Machine learning variance analysis tools for research
+footer_credits_html: |
+  <p>Author: <a href="https://enheragu.github.io/" target="_blank" rel="noopener noreferrer">Enrique Heredia-Aguado</a></p>
+umh_url: "https://www.umh.es/"
+i3e_url: "https://i3e.umh.es/"
+arvc_url: "https://arvc.umh.es/"
+custom_css:
+  - /mlv-tools/assets/tool-core/mlva/comparison-shell.css
+  - css/style.css
+custom_js:
+  - js/i18n.js
+  - js/app.js
+---
+<div class="content-shell">
+  <main class="about-main">
+
+    {% capture about_body %}
+      <div id="about-body-text">
+        <p>This work is part of a PhD thesis in robotics, computer vision, and artificial intelligence at the <strong>Universidad Miguel Hernández de Elche (UMH)</strong>, Spain. The thesis focuses on multispectral fusion techniques for detection tasks on mobile robots. This study is a methodological contribution examining how variance in ML evaluation metrics affects model ranking and reproducibility, and proposing practical protocols to account for it.</p>
+        <p>Developed within the <strong>ARVC</strong> (Automation, Robotics and Computer Vision) research group, part of the <strong><a href="{{ page.i3e_url }}" target="_blank" rel="noopener noreferrer">I3E</a></strong> research institute at UMH.</p>
+      </div>
+      <div class="about-logos">
+        <a href="{{ page.umh_url }}" target="_blank" rel="noopener noreferrer" class="about-logo-link" aria-label="Universidad Miguel Hernández de Elche">
+          <img src="assets/umh-logo.jpg" alt="Universidad Miguel Hernández de Elche" class="about-logo">
+        </a>
+        <a href="{{ page.i3e_url }}" target="_blank" rel="noopener noreferrer" class="about-logo-link" aria-label="I3E — Instituto de Investigación e Innovación en Ingeniería, UMH">
+          <img src="assets/i3e-logo.png" alt="I3E — Instituto de Investigación e Innovación en Ingeniería, UMH" class="about-logo">
+        </a>
+        <a href="{{ page.arvc_url }}" target="_blank" rel="noopener noreferrer" class="about-logo-link" aria-label="ARVC — Automation, Robotics and Computer Vision">
+          <img src="assets/arvc-logo.jpg" alt="ARVC — Automation, Robotics and Computer Vision" class="about-logo">
+        </a>
+      </div>
+    {% endcapture %}
+    {% include widgets/widget_content_box.html
+      title="About"
+      title_id="about-section-title"
+      title_tone="accent"
+      panel_class="intro-panel"
+      body=about_body
+    %}
+
+  </main>
+</div>

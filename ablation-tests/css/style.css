@@ -43,7 +43,7 @@
   white-space: nowrap;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 37.5em) {
   .seed-percentile-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }

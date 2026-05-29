@@ -19,6 +19,11 @@
           { href: '/mlv-tools/ablation-tests/', label: { en: 'Ablation Tests', es: 'Ablation Tests' } },
           { href: '/mlv-tools/standardizing-comparisons/', label: { en: 'Standardizing Comparisons', es: 'Standardizing Comparisons' } }
         ]
+      },
+      {
+        items: [
+          { href: '/mlv-tools/about/', label: { en: 'About', es: 'Acerca de' } }
+        ]
       }
     ]
   };

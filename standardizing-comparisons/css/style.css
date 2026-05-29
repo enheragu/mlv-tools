@@ -123,7 +123,7 @@
   white-space: nowrap;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
   .sampling-error-triple-grid {
     grid-template-columns: 1fr;
   }

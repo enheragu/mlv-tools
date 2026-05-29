@@ -66,10 +66,10 @@
 }
 
 .sim-method-copy {
-  font-size: var(--txt-sm, .78rem);
+  font-size: var(--txt-base);
   color: var(--clr-muted);
   line-height: var(--txt-lh-relaxed);
-  margin: 0;
+  margin: 0 0 .75rem;
 }
 
 .sim-config-block .stepper {
@@ -135,7 +135,7 @@
 .case-context-note {
   margin: .5rem 0 1rem;
   color: var(--clr-muted);
-  font-size: var(--txt-sm);
+  font-size: var(--txt-base);
   line-height: var(--txt-lh-relaxed);
   width: 100%;
 }
@@ -583,14 +583,14 @@
   min-height: 390px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
   .select-row {
     grid-template-columns: 1fr;
   }
 
   .case-context-note {
     margin: .35rem 0 .7rem;
-    font-size: var(--txt-xs);
+    font-size: var(--txt-md);
     line-height: var(--txt-lh-body);
     max-width: 100%;
   }
@@ -786,7 +786,7 @@ body.mlva-busy * {
   display: none !important;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25em) {
   .decision-tree-grid {
     grid-template-columns: 1fr;
   }
