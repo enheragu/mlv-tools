@@ -40,7 +40,7 @@
 
 .models-title-inline {
   margin: 0;
-  font-size: var(--txt-sm, 0.8rem);
+  font-size: var(--txt-sm);
   font-weight: var(--txt-w-semibold, 600);
   color: var(--clr-text);
 }
@@ -116,7 +116,7 @@
 }
 
 .chart-modal-head h3 {
-  font-size: var(--txt-base, .95rem);
+  font-size: var(--txt-base);
   color: var(--clr-primary);
 }
 
@@ -246,7 +246,7 @@
 .results-note {
   margin: .45rem 0 0;
   color: var(--txt-muted, var(--clr-muted));
-  font-size: var(--txt-sm, .79rem);
+  font-size: var(--txt-sm);
 }
 
 .decision-tree-card {
@@ -277,7 +277,7 @@
   border-radius: 999px;
   background: color-mix(in oklab, var(--clr-panel) 94%, var(--clr-surface));
   color: var(--clr-text);
-  font-size: var(--txt-sm-plus, .82rem);
+  font-size: var(--txt-sm-plus);
   box-shadow: 0 0 0 1px color-mix(in oklab, var(--clr-primary) 14%, transparent) inset;
 }
 
@@ -293,7 +293,7 @@
 }
 
 .decision-factor-root {
-  font-size: var(--txt-sm-plus, .82rem);
+  font-size: var(--txt-sm-plus);
   color: var(--clr-muted);
   padding-top: .35rem;
   white-space: nowrap;
@@ -330,7 +330,7 @@
 
 .decision-node-probs {
   color: var(--clr-muted);
-  font-size: var(--txt-sm-plus, .82rem);
+  font-size: var(--txt-sm-plus);
 }
 
 .decision-node-bar {
@@ -355,7 +355,7 @@
   margin-top: .28rem;
   min-height: 1.1em;
   color: color-mix(in oklab, var(--clr-data-green, #3fb950) 75%, var(--clr-text));
-  font-size: var(--txt-xs, .76rem);
+  font-size: var(--txt-xs);
 }
 
 .decision-tree-toolbar {
@@ -367,7 +367,7 @@
 }
 
 .decision-select-label {
-  font-size: var(--txt-sm-plus, .82rem);
+  font-size: var(--txt-sm-plus);
   color: var(--clr-muted);
 }
 
@@ -418,7 +418,7 @@
 
 .decision-col-title {
   margin: 0 0 .42rem;
-  font-size: var(--txt-sm-plus, .82rem);
+  font-size: var(--txt-sm-plus);
   color: var(--clr-muted);
 }
 
@@ -474,13 +474,13 @@
 }
 
 .decision-choice-title {
-  font-size: var(--txt-sm, .79rem);
+  font-size: var(--txt-sm);
   color: var(--clr-text);
   font-weight: var(--txt-w-semibold, 600);
 }
 
 .decision-choice-prob {
-  font-size: var(--txt-xs, .74rem);
+  font-size: var(--txt-xs);
   color: var(--clr-muted);
 }
 
@@ -505,7 +505,7 @@
 }
 
 .decision-step2-group-head {
-  font-size: var(--txt-xs, .74rem);
+  font-size: var(--txt-xs);
   color: var(--clr-muted);
   margin-bottom: .3rem;
 }
@@ -521,7 +521,7 @@
   border-radius: 8px;
   border: 1px dashed color-mix(in oklab, var(--clr-border) 70%, transparent);
   color: var(--clr-text);
-  font-size: var(--txt-xs, .75rem);
+  font-size: var(--txt-xs);
 }
 
 .decision-step-list {
@@ -546,19 +546,19 @@
 }
 
 .decision-step-tag {
-  font-size: var(--txt-xs, .74rem);
+  font-size: var(--txt-xs);
   letter-spacing: .02em;
   text-transform: uppercase;
   color: var(--clr-muted);
 }
 
 .decision-step-desc {
-  font-size: var(--txt-xs, .76rem);
+  font-size: var(--txt-xs);
   color: var(--clr-text);
 }
 
 .decision-step-prob {
-  font-size: var(--txt-xs, .76rem);
+  font-size: var(--txt-xs);
   color: var(--clr-muted);
 }
 
@@ -650,7 +650,7 @@ body.mlva-busy * {
 .decision-legend-note {
   margin: 0;
   color: var(--clr-muted);
-  font-size: var(--txt-xs, .75rem);
+  font-size: var(--txt-xs);
 }
 
 .decision-tree-grid {
@@ -666,7 +666,7 @@ body.mlva-busy * {
 
 .decision-panel-title {
   margin: 0;
-  font-size: var(--txt-md-plus, .88rem);
+  font-size: var(--txt-md-plus);
   color: var(--clr-muted);
 }
 

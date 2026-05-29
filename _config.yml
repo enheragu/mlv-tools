@@ -26,18 +26,18 @@ defaults:
       with_chart_interactions: true
       with_publication_ui: true
   - scope:
-      path: "mlv-tools/model-inspector"
+      path: "model-inspector"
     values:
       header_supertitle: MLV Tools
   - scope:
-      path: "mlv-tools/replication-and-comparison"
+      path: "replication-and-comparison"
     values:
       header_supertitle: MLV Tools
   - scope:
-      path: "mlv-tools/ablation-tests"
+      path: "ablation-tests"
     values:
       header_supertitle: MLV Tools
   - scope:
-      path: "mlv-tools/standardizing-comparisons"
+      path: "standardizing-comparisons"
     values:
       header_supertitle: MLV Tools

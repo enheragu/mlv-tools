@@ -40,7 +40,7 @@
 
 .models-title-inline {
   margin: 0;
-  font-size: var(--txt-sm, 0.8rem);
+  font-size: var(--txt-sm);
   font-weight: var(--txt-w-semibold, 600);
   color: var(--clr-text);
 }
@@ -108,7 +108,7 @@
 }
 
 .chart-modal-head h3 {
-  font-size: var(--txt-base, .95rem);
+  font-size: var(--txt-base);
   color: var(--clr-primary);
 }
 

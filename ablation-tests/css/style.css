@@ -16,7 +16,7 @@
 }
 
 .seed-percentile-mini .shared-plot-title--sm {
-  font-size: var(--txt-xs, .75rem);
+  font-size: var(--txt-xs);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -27,7 +27,7 @@
 }
 
 .seed-id-display {
-  font-size: var(--txt-sm, .82rem);
+  font-size: var(--txt-sm);
   white-space: nowrap;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .seed-pct-badge {
-  font-size: var(--txt-sm, .82rem);
+  font-size: var(--txt-sm);
   font-weight: 700;
   margin-left: auto;
   padding: 0 .3rem;
