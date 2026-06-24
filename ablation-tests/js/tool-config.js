@@ -116,6 +116,59 @@
             }
           }
         }
+      },
+      cpc18: {
+        // CPC18 ablations. Metric is mean prediction error (MSE x100), so
+        // lower is better: the shared comparison core flags lowerIsBetter so
+        // best run = min and misranking is computed in the negated space while
+        // the displayed value stays positive. The higher-is-better presets
+        // above stay unflagged.
+        metrics: {
+          b1: {
+            // BourginMLP batch_size x learning_rate factorial (9 conditions x 800 seeds).
+            scale: 'percent',
+            lowerIsBetter: true,
+            table: {
+              file: '../raw_data/cpc18_ablation_b1_table.csv',
+              metricColumn: ['mse_x100', 'MSE x100', 'mse'],
+              fieldAliases: {
+                batch_size: ['batch size', 'batch-size', 'batch'],
+                learning_rate: ['learning rate', 'learning-rate', 'lr'],
+                index: ['run', 'group', 'group_id'],
+                seed: ['seed', 'Seed']
+              },
+              groupField: 'index',
+              seedColumn: 'seed',
+              factors: [
+                { field: 'batch_size', label: 'B' },
+                { field: 'learning_rate', label: 'L' }
+              ],
+              modelTemplate: 'BourginMLP_B{batch_size}_L{learning_rate}'
+            }
+          },
+          b3: {
+            // SparseMLP epsilon x learning_rate factorial (9 conditions x 800 seeds).
+            scale: 'percent',
+            lowerIsBetter: true,
+            table: {
+              file: '../raw_data/cpc18_ablation_b3_table.csv',
+              metricColumn: ['mse_x100', 'MSE x100', 'mse'],
+              fieldAliases: {
+                epsilon: ['eps', 'epsilon'],
+                learning_rate: ['learning rate', 'learning-rate', 'lr'],
+                index: ['run', 'group', 'group_id'],
+                seed: ['seed', 'Seed']
+              },
+              groupField: 'index',
+              seedColumn: 'seed',
+              factors: [
+                { field: 'epsilon', label: 'E' },
+                { field: 'learning_rate', label: 'L' }
+              ],
+              modelTemplate: 'SparseMLP_E{epsilon}_L{learning_rate}'
+            }
+          }
+        }
       }
     },
     modelOrderPolicy: {
@@ -127,6 +180,10 @@
         map5095: 'yaml',
         precision: 'yaml',
         recall: 'yaml'
+      },
+      cpc18: {
+        b1: 'yaml',
+        b3: 'yaml'
       }
     },
     selectAllByDefault: true,

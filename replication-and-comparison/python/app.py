@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import itertools
 from typing import Dict, List, Optional
 
 import numpy as np
@@ -204,6 +205,21 @@ def _simulate_decision_paths(
             p_step1_ok = float(step1_ok / total) if total > 0 else 0.0
             p_step2_ok = float(step2_ok / total) if total > 0 else 0.0
             p_reach_ok = float(reach_ok / total) if total > 0 else 0.0
+
+            # Ensure every possible step-1 branch (each combination of the
+            # remaining-factor levels) is present, even ones the greedy never
+            # selected, so the decision tree stays complete instead of dropping
+            # whole branches; missing branches are shown with probability 0.
+            if remaining:
+                for combo in itertools.product(*[factor_values.get(f, []) for f in remaining]):
+                    sk = " | ".join(f"{f}={v}" for f, v in zip(remaining, combo))
+                    if sk not in step1_counts:
+                        step1_counts[sk] = 0
+                        step1_is_best[sk] = all(
+                            str(v) == str(global_best_factors.get(f, "")) for f, v in zip(remaining, combo)
+                        )
+                        step2_counts[sk] = {}
+                        reach_counts[sk] = {}
 
             # Guarantee every possible start-factor value appears as a step2 option
             # in each observed step1 bucket, even when the simulation never sampled it.

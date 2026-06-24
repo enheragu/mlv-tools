@@ -668,9 +668,20 @@ console.log('[comparison-app-core.js] Script loaded and running');
           std: std(vals, m),
           n: vals.length,
           max: vals.length ? Math.max.apply(null, vals) : NaN,
+          min: vals.length ? Math.min.apply(null, vals) : NaN,
         };
       });
       return out;
+    }
+
+    // A metric may declare lowerIsBetter (e.g. an error/MSE). The shared core
+    // works in a canonical higher-is-better space: data is kept positive for
+    // display, and the only place direction matters is (a) which run is "best"
+    // in the summary table and (b) the simulation, where data is negated just
+    // before being sent so the untouched higher-is-better stats stay correct.
+    function metricLowerIsBetter() {
+      var info = getPresetMetrics()[state.metric];
+      return !!(info && info.lowerIsBetter);
     }
 
     function normalizeFlagToken(value) {
@@ -837,16 +848,17 @@ console.log('[comparison-app-core.js] Script loaded and running');
       var cfg = getModelSummarySortConfig();
       var sortableKeys = cfg.enabled ? cfg.sortableKeys : [];
 
+      var lower = metricLowerIsBetter();
       var rows = ordered.map(function (model) {
-        var st = state.statsByModel[model] || { max: NaN, n: 0, mean: NaN, std: NaN };
+        var st = state.statsByModel[model] || { max: NaN, min: NaN, n: 0, mean: NaN, std: NaN };
         var p90 = Number.isFinite(st.mean) && Number.isFinite(st.std)
-          ? (st.mean + NORMAL_Z_P90 * st.std)
+          ? (st.mean + (lower ? -1 : 1) * NORMAL_Z_P90 * st.std)
           : NaN;
         return {
           model: model,
           label: state.modelDisplayByKey[model] || model,
           color: state.modelColorByKey[model] || '#58a6ff',
-          best: st.max,
+          best: lower ? st.min : st.max,
           n: st.n || 0,
           mean: st.mean,
           std: st.std,
@@ -854,13 +866,15 @@ console.log('[comparison-app-core.js] Script loaded and running');
         };
       });
 
-      var maxBest = -Infinity;
-      var maxMean = -Infinity;
-      var maxP90 = -Infinity;
+      // "Best" cell per column = smallest when lowerIsBetter, largest otherwise.
+      var pick = lower ? Math.min : Math.max;
+      var maxBest = lower ? Infinity : -Infinity;
+      var maxMean = lower ? Infinity : -Infinity;
+      var maxP90 = lower ? Infinity : -Infinity;
       rows.forEach(function (row) {
-        if (Number.isFinite(row.best)) maxBest = Math.max(maxBest, row.best);
-        if (Number.isFinite(row.mean)) maxMean = Math.max(maxMean, row.mean);
-        if (Number.isFinite(row.p90)) maxP90 = Math.max(maxP90, row.p90);
+        if (Number.isFinite(row.best)) maxBest = pick(maxBest, row.best);
+        if (Number.isFinite(row.mean)) maxMean = pick(maxMean, row.mean);
+        if (Number.isFinite(row.p90)) maxP90 = pick(maxP90, row.p90);
       });
 
       var shownRows = applyModelSummarySort(rows, sortableKeys);
@@ -895,10 +909,13 @@ console.log('[comparison-app-core.js] Script loaded and running');
     }
 
     function rankByStatsOrder(models) {
+      var lower = metricLowerIsBetter();
       return models.slice().sort(function (a, b) {
-        var byMax = state.statsByModel[b].max - state.statsByModel[a].max;
-        if (byMax !== 0) return byMax;
-        return state.statsByModel[b].mean - state.statsByModel[a].mean;
+        var sa = state.statsByModel[a] || {}, sb = state.statsByModel[b] || {};
+        var ba = lower ? sa.min : sa.max, bb = lower ? sb.min : sb.max;
+        var byBest = lower ? (ba - bb) : (bb - ba);
+        if (byBest !== 0) return byBest;
+        return lower ? (sa.mean - sb.mean) : (sb.mean - sa.mean);
       });
     }
 
@@ -998,14 +1015,20 @@ console.log('[comparison-app-core.js] Script loaded and running');
         ablation_precision: copy.metricAblationP,
         ablation_recall: copy.metricAblationR,
       };
-      return byKey[metric] || metric;
+      // Existing metrics keep their explicit (non-conventional) keys above;
+      // a new metric falls back to metric<Name> (e.g. mse -> metricMse).
+      var convKey = 'metric' + metric.charAt(0).toUpperCase() + metric.slice(1);
+      return byKey[metric] || copy[convKey] || metric;
     }
 
     function renderCaseContext(copy) {
       if (!copy) return;
       var html = '';
-      if (state.preset === 'detection') html = copy.caseContextDetection || '';
-      else if (state.preset === 'mnist') html = copy.caseContextMnist || '';
+      // Resolve the case-context note by convention from the active preset:
+      // mnist -> caseContextMnist, detection -> caseContextDetection (unchanged),
+      // and any new preset (e.g. cpc18 -> caseContextCpc18) works without edits.
+      var ctxKey = 'caseContext' + state.preset.charAt(0).toUpperCase() + state.preset.slice(1);
+      html = copy[ctxKey] || '';
 
       if (state.dataProfile && state.dataProfile.source === 'table') {
         var p = state.dataProfile;
@@ -1031,7 +1054,10 @@ console.log('[comparison-app-core.js] Script loaded and running');
 
       var items = [];
       Object.keys(PRESETS).forEach(function (presetId) {
-        var label = presetId === 'mnist' ? (copy.presetMnist || 'MNIST') : (presetId === 'detection' ? (copy.presetDetection || 'Detection') : presetId);
+        // Label by convention: mnist -> presetMnist, detection -> presetDetection
+        // (unchanged), any new preset -> preset<Name>; falls back to the raw id.
+        var labelKey = 'preset' + presetId.charAt(0).toUpperCase() + presetId.slice(1);
+        var label = copy[labelKey] || presetId;
         items.push({ id: presetId, label: label });
       });
 
@@ -2080,10 +2106,21 @@ console.log('[comparison-app-core.js] Script loaded and running');
 
     async function requestPythonAnalysis(selected, mcTrials, bsTrials) {
       if (window.StatMlvaSimulationCore && typeof window.StatMlvaSimulationCore.requestAnalysis === 'function') {
+        // The simulation (Pyodide / Flask) works in higher-is-better space and
+        // is left untouched. For a lowerIsBetter metric we negate the data only
+        // here, for the payload, so best = max(-error) = min(error); the data
+        // kept for display (histogram, summary, normality) stays positive.
+        var simData = state.dataByModel;
+        if (metricLowerIsBetter()) {
+          simData = {};
+          Object.keys(state.dataByModel).forEach(function (m) {
+            simData[m] = (state.dataByModel[m] || []).map(function (v) { return -v; });
+          });
+        }
         return window.StatMlvaSimulationCore.requestAnalysis({
           apiBaseUrl: getApiBaseUrl(),
           selectedModels: selected,
-          dataByModel: state.dataByModel,
+          dataByModel: simData,
           montecarloTrials: mcTrials,
           bootstrapTrials: bsTrials,
           nSamplesMin: 1,
@@ -2155,7 +2192,8 @@ console.log('[comparison-app-core.js] Script loaded and running');
         output.innerHTML = tpl
           .replace('{count}', String(selected.length))
           .replace('{mcTrials}', String(mcTrials))
-          .replace('{bsTrials}', String(bsTrials));
+          .replace('{bsTrials}', String(bsTrials))
+          + (copy.simVariesNote ? '<br><span class="hint">' + copy.simVariesNote + '</span>' : '');
       }
 
       if (!tableBody) {

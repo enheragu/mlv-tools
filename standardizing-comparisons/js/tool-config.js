@@ -47,6 +47,20 @@
             scale: 'ratio'
           }
         }
+      },
+      cpc18: {
+        metrics: {
+          // CPC18 mean prediction error (MSE x100). Lower is better, so the
+          // shared core flags it lowerIsBetter (best run = min, misranking
+          // computed in the negated space; display stays positive).
+          mse: {
+            files: [
+              '../raw_data/cpc18_mse_data_raw.yaml'
+            ],
+            scale: 'percent',
+            lowerIsBetter: true
+          }
+        }
       }
     },
     modelOrderPolicy: {
@@ -58,6 +72,9 @@
         map5095: 'yaml',
         precision: 'yaml',
         recall: 'yaml'
+      },
+      cpc18: {
+        mse: 'yaml'
       }
     },
     selectAllByDefault: true,

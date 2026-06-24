@@ -26,6 +26,8 @@
         kaistDay: 'Day',
         kaistNight: 'Night',
         detectionModelNote: 'YOLOv8 was evaluated with multiple image fusion strategies (early, midpoint, and late fusion) applied to RGB–LWIR image pairs from the KAIST dataset.',
+        presetCpc18: 'CPC18 - Risky choice',
+        datasetNoSamplesCpc18: 'CPC18 is a tabular benchmark of engineered numeric features describing monetary gambles, so there is no image gallery.',
       },
       es: {
         pageTitle: 'Inspecto de Modelos y Datos — MLV Tools',
@@ -51,6 +53,8 @@
         kaistDay: 'Día',
         kaistNight: 'Noche',
         detectionModelNote: 'YOLOv8 fue evaluado con múltiples estrategias de fusión de imagen (early, midpoint y late fusion) aplicadas a pares de imágenes RGB–LWIR del dataset KAIST.',
+        presetCpc18: 'CPC18 - Elección bajo riesgo',
+        datasetNoSamplesCpc18: 'CPC18 es un conjunto tabular de características numéricas que describen apuestas monetarias, por lo que no hay galería de imágenes.',
       }
     }
   });

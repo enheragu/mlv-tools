@@ -26,6 +26,14 @@
     detection: [
       { name: 'YOLOCh3m', type: 'Object Detector (YOLOv8m)', layers: 295, params: 25858057, memory: 98.7, hasDiagram: false,
         externalRef: 'https://docs.ultralytics.com/models/yolov8/' }
+    ],
+    cpc18: [
+      { name: 'BEAST_GB',       type: 'Gradient-boosted trees (XGBoost, 978×d3)', layers: null, params: null, memory: 1.5,  hasDiagram: true },
+      { name: 'BourginMLP',     type: 'MLP (3 hidden)',                            layers: 4,    params: 90576, memory: 0.35, hasDiagram: true },
+      { name: 'ContextDepNet',  type: 'Context-dependent NN (sigmoid)',            layers: 3,    params: 2305,  memory: 0.01, hasDiagram: true },
+      { name: 'SparseMLP',      type: 'Sparse MLP (Erdős–Rényi mask)',             layers: 4,    params: 90576, memory: 0.35, hasDiagram: true },
+      { name: 'PsychForest',    type: 'Random forest (500 trees)',                 layers: null, params: null, memory: 5.0,  hasDiagram: true },
+      { name: 'LinearLogistic', type: 'Single sigmoid neuron (logistic)',          layers: 1,    params: 38,    memory: 0.001, hasDiagram: true }
     ]
   };
 
@@ -83,6 +91,26 @@
             lwir: { subdir: 'night-lwir/', file: 'train_set05_V000_lwir_I00451.jpg'    } }
         ]}
       ]
+    },
+    cpc18: {
+      name: 'CPC18',
+      fullName: 'Choice Prediction Competition 2018',
+      year: 2018,
+      authors: 'Plonsky, O., Apel, R., Erev, I., Ert, E. &amp; Tennenholtz, M.',
+      citation: 'Plonsky, O., Apel, R., Erev, I., Ert, E. &amp; Tennenholtz, M. (2018). When and how can social scientists add value to data scientists? A choice prediction competition for human decision making. <em>Technical report</em>; data: Zenodo record 2571510.',
+      stats: [
+        { label: 'Task',            label_es: 'Tarea',                  value: 'Predicting human risky choice (binary monetary gambles)' },
+        { label: 'Target',          label_es: 'Objetivo',               value: 'Aggregate B-rate (probability humans chose option B)' },
+        { label: 'Train',           label_es: 'Entrenamiento',          value: '208 problems / 1,040 rows (problem × block)' },
+        { label: 'Test',            label_es: 'Test',                   value: '60 problems / 300 rows (canonical hidden split)' },
+        { label: 'Features',        label_es: 'Características',         value: '37 BEAST-derived features (numeric + one-hot + engineered)' },
+        { label: 'Metric',          label_es: 'Métrica',                value: 'Mean MSE of predicted choice rate (×100), lower is better' },
+        { label: 'Best published',  label_es: 'Mejor publicado',        value: 'BEAST-GB ≈ 0.57 (×100); competition winner' },
+        { label: 'Format',          label_es: 'Formato',                value: 'Tabular (engineered numeric features), no images' }
+      ],
+      sampleDir: null,
+      sampleFiles: [],
+      sampleGroups: null
     }
   };
 
@@ -330,7 +358,93 @@
     mlp2_b3_conv --> mlp2_b3_max
     mlp2_b3_max --> pool_b3
     pool_b3 --> drop_b3
-    drop_b3 --> output`
+    drop_b3 --> output`,
+
+    BEAST_GB: `graph TD
+    input_features("Input Features (37 BEAST features)"):::noBox
+    tree_1("<b>Tree 1</b> (depth 3)"):::blockStyle
+    tree_2("<b>Tree 2</b> (depth 3)"):::blockStyle
+    tree_3("<b>Tree 3</b> (depth 3)"):::blockStyle
+    tree_dots("..."):::noBox
+    tree_n("<b>Tree 978</b> (depth 3)"):::blockStyle
+    sum("<b>Weighted Sum</b> (lr 0.0109)"):::blockStyle
+    output("Output (B-rate)"):::noBox
+    input_features --> tree_1
+    input_features --> tree_2
+    input_features --> tree_3
+    input_features --> tree_dots
+    input_features --> tree_n
+    tree_1 --> sum
+    tree_2 --> sum
+    tree_3 --> sum
+    tree_dots --> sum
+    tree_n --> sum
+    sum --> output`,
+
+    BourginMLP: `graph TD
+    input_features("Input Features (37 BEAST features)"):::noBox
+    Linear_fc1("<b>Linear</b>(37, 200); <b>SiLU</b>"):::blockStyle
+    Linear_fc2("<b>Linear</b>(200, 275); <b>SiLU</b>"):::blockStyle
+    Linear_fc3("<b>Linear</b>(275, 100); <b>SiLU</b>"):::blockStyle
+    Linear_fc4("<b>Linear</b>(100, 1); <b>Sigmoid</b>"):::blockStyle
+    output("Output (B-rate)"):::noBox
+    input_features --> Linear_fc1
+    Linear_fc1 --> Linear_fc2
+    Linear_fc2 --> Linear_fc3
+    Linear_fc3 --> Linear_fc4
+    Linear_fc4 --> output`,
+
+    ContextDepNet: `graph TD
+    input_features("Input Features (37 BEAST features)"):::noBox
+    Linear_fc1("<b>Linear</b>(37, 32); <b>Sigmoid</b>"):::blockStyle
+    Linear_fc2("<b>Linear</b>(32, 32); <b>Sigmoid</b>"):::blockStyle
+    Linear_fc3("<b>Linear</b>(32, 1); <b>Sigmoid</b>"):::blockStyle
+    output("Output (B-rate)"):::noBox
+    input_features --> Linear_fc1
+    Linear_fc1 --> Linear_fc2
+    Linear_fc2 --> Linear_fc3
+    Linear_fc3 --> output`,
+
+    SparseMLP: `graph TD
+    input_features("Input Features (37 BEAST features)"):::noBox
+    Linear_fc1("<b>Sparse Linear</b>(37, 200); ER mask ε=20 (~64% kept); <b>SiLU</b>"):::blockStyle
+    Linear_fc2("<b>Sparse Linear</b>(200, 275); ER mask ε=20 (~17% kept); <b>SiLU</b>"):::blockStyle
+    Linear_fc3("<b>Sparse Linear</b>(275, 100); ER mask ε=20 (~27% kept); <b>SiLU</b>"):::blockStyle
+    Linear_fc4("<b>Linear</b>(100, 1) dense; <b>Sigmoid</b>"):::blockStyle
+    output("Output (B-rate)"):::noBox
+    input_features --> Linear_fc1
+    Linear_fc1 --> Linear_fc2
+    Linear_fc2 --> Linear_fc3
+    Linear_fc3 --> Linear_fc4
+    Linear_fc4 --> output`,
+
+    PsychForest: `graph TD
+    input_features("Input Features (37 BEAST features)"):::noBox
+    tree_1("<b>Tree 1</b> (bootstrap, √feats)"):::blockStyle
+    tree_2("<b>Tree 2</b> (bootstrap, √feats)"):::blockStyle
+    tree_3("<b>Tree 3</b> (bootstrap, √feats)"):::blockStyle
+    tree_dots("..."):::noBox
+    tree_n("<b>Tree 500</b> (bootstrap, √feats)"):::blockStyle
+    avg("<b>Average</b>"):::blockStyle
+    output("Output (B-rate)"):::noBox
+    input_features --> tree_1
+    input_features --> tree_2
+    input_features --> tree_3
+    input_features --> tree_dots
+    input_features --> tree_n
+    tree_1 --> avg
+    tree_2 --> avg
+    tree_3 --> avg
+    tree_dots --> avg
+    tree_n --> avg
+    avg --> output`,
+
+    LinearLogistic: `graph TD
+    input_features("Input Features (37 BEAST features)"):::noBox
+    Linear_fc1("<b>Linear</b>(37, 1); <b>Sigmoid</b>"):::blockStyle
+    output("Output (B-rate)"):::noBox
+    input_features --> Linear_fc1
+    Linear_fc1 --> output`
   };
 
   // ============================================================
@@ -581,8 +695,18 @@
     }).join('');
 
     lbItems = [];
-    var imagesHtml;
-    if (dataset.sampleGroups) {
+    var imagesHtml = '';
+    var noteHtml = '';
+    var hasGroups = dataset.sampleGroups && dataset.sampleGroups.length;
+    var hasFiles  = dataset.sampleFiles && dataset.sampleFiles.length;
+    if (!hasGroups && !hasFiles) {
+      // Tabular dataset (e.g. CPC18): no gallery. The table spans full width
+      // and the context goes into a subtle caption, not an empty image panel.
+      var noteKey = 'datasetNoSamples' + dataset.name;
+      noteHtml = '<p class="inspector-dataset-note">' +
+        (copy[noteKey] || copy.datasetNoSamplesCpc18 ||
+         'This is a tabular dataset, so there is no image gallery.') + '</p>';
+    } else if (dataset.sampleGroups) {
       // KAIST: paired RGB+LWIR groups
       imagesHtml = dataset.sampleGroups.map(function (g) {
         var groupLabel = copy[g.key] || g.key;
@@ -629,17 +753,20 @@
           (copy.datasetTitle || 'Dataset') + ': ' + dataset.name +
         '</h3>' +
         '<p class="inspector-dataset-fullname">' + dataset.fullName + ' (' + dataset.year + ')</p>' +
-        '<div class="inspector-dataset-body">' +
+        '<div class="inspector-dataset-body' + (imagesHtml ? '' : ' inspector-dataset-body--full') + '">' +
           '<div class="inspector-dataset-meta">' +
             '<table class="inspector-stat-table">' +
               '<tbody>' + statsHtml + '</tbody>' +
             '</table>' +
             '<p class="inspector-citation"><strong>' + (copy.citationLabel || 'Citation') + ':</strong> ' + dataset.citation + '</p>' +
+            noteHtml +
           '</div>' +
-          '<div class="inspector-dataset-images">' +
-            '<h4 class="inspector-images-title">' + (copy.sampleImagesTitle || 'Sample images') + '</h4>' +
-            imagesHtml +
-          '</div>' +
+          (imagesHtml
+            ? '<div class="inspector-dataset-images">' +
+                '<h4 class="inspector-images-title">' + (copy.sampleImagesTitle || 'Sample images') + '</h4>' +
+                imagesHtml +
+              '</div>'
+            : '') +
         '</div>' +
       '</div>';
   }
@@ -660,7 +787,8 @@
       className: 'shared-tab',
       items: [
         { id: 'mnist',     label: copy.presetMnist     || 'MNIST' },
-        { id: 'detection', label: copy.presetDetection || 'Detection' }
+        { id: 'detection', label: copy.presetDetection || 'Detection' },
+        { id: 'cpc18',     label: copy.presetCpc18     || 'CPC18' }
       ],
       onSelect: function (preset) {
         if (preset === state.preset) return;

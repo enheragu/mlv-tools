@@ -16,6 +16,9 @@
         samplingErrorNote: 'The sampling error (standard error) measures how much a statistic (mean or std) varies across repeated experiments. For the mean it decreases as \u03c3/\u221aN; for the standard deviation as \u03c3/\u221a(2(N\u22121)). Three estimation methods are shown: Analytical (closed-form formula \u2014 solid line), Bootstrap (resampling with replacement \u2014 dashed), and Monte Carlo (parametric sampling \u2014 dotted). The derivative highlights where diminishing returns set in (Section 4.2).',
         samplingErrorTabMean: 'Mean',
         samplingErrorTabStd: 'Std',
+        presetCpc18: 'CPC18 - Risky choice',
+        metricMse: 'MSE×100',
+        caseContextCpc18: 'CPC18 is a behavioural-science benchmark for risky choice: it predicts how people choose between risky options. Here the angle is standardization — how many runs are needed before the ranking and scores stabilise, so comparisons stop depending on one lucky run. The score is the mean prediction error (MSE×100), so lower is better. The data covers 6 models retrained over 800 random seeds each, so the spread you see is genuine seed variance, not noise we added.',
       },
       es: {
         pageTitle: 'Standardizing Comparisons - ML Variance Analysis Tools',
@@ -31,6 +34,9 @@
         samplingErrorNote: 'El error de muestreo (error est\u00e1ndar) mide cu\u00e1nto var\u00eda un estad\u00edstico (media o desviaci\u00f3n t\u00edpica) entre experimentos repetidos. Para la media decrece como \u03c3/\u221aN; para la desviaci\u00f3n t\u00edpica como \u03c3/\u221a(2(N\u22121)). Se muestran tres m\u00e9todos de estimaci\u00f3n: Anal\u00edtico (f\u00f3rmula cerrada \u2014 l\u00ednea continua), Bootstrap (remuestreo con reemplazo \u2014 discontinua) y Monte Carlo (muestreo param\u00e9trico \u2014 punteada). La derivada resalta d\u00f3nde se alcanzan rendimientos decrecientes (Secci\u00f3n 4.2).',
         samplingErrorTabMean: 'Media',
         samplingErrorTabStd: 'Desv. t\u00edpica',
+        presetCpc18: 'CPC18 - Elecci\u00f3n bajo riesgo',
+        metricMse: 'MSE\u00d7100',
+        caseContextCpc18: 'CPC18 es un benchmark de ciencias del comportamiento para elecci\u00f3n bajo riesgo: predice c\u00f3mo elige la gente entre opciones con riesgo. Aqu\u00ed el enfoque es la estandarizaci\u00f3n \u2014 cu\u00e1ntas ejecuciones hacen falta antes de que el ranking y las puntuaciones se estabilicen, para que las comparaciones dejen de depender de una ejecuci\u00f3n afortunada. La m\u00e9trica es el error medio de predicci\u00f3n (MSE\u00d7100), as\u00ed que menor es mejor. Los datos cubren 6 modelos reentrenados con 800 semillas aleatorias cada uno, as\u00ed que la dispersi\u00f3n que ves es varianza real de semilla, no ruido a\u00f1adido.',
       }
     }
   });

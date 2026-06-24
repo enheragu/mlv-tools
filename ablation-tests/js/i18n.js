@@ -29,6 +29,10 @@
         seedPercentileNote: 'Each mini-histogram shows the full distribution of metric values for one condition across all seeds. Move the slider to highlight a specific seed: the vertical line marks where that seed\u2019s result falls and the badge shows its percentile. Notice how the same seed can rank very differently across conditions \u2014 this illustrates that controlling the random seed does not guarantee consistent or transferable results, and extrapolating conclusions from a single seed is unreliable (Section 3.3).',
         seedNoSeedNote: 'In the detection experiments a consistent seed could not be maintained across training runs due to framework limitations. Per-seed percentile analysis is therefore not available for this preset.',
         seedSliderLabel: 'Seed',
+        presetCpc18: 'CPC18 - Risky choice',
+        metricB1: 'BourginMLP',
+        metricB3: 'SparseMLP',
+        caseContextCpc18: 'CPC18 is a behavioural-science benchmark for risky choice: it predicts how people choose between risky options. We port the same variance-aware ablation methodology to a dataset this community already uses. The score is the mean prediction error (MSE x100), so here lower is better. Two factorial ablations are shown, each retrained over 800 random seeds per condition: the BourginMLP ablation sweeps batch size x learning rate, and the SparseMLP ablation sweeps epsilon x learning rate. The spread you see is genuine seed variance, not noise we added.',
       },
       es: {
         pageTitle: 'Ablation Tests - ML Variance Analysis Tools',
@@ -57,6 +61,10 @@
         seedPercentileNote: 'Cada mini-histograma muestra la distribuci\u00f3n completa de valores de la m\u00e9trica para una condici\u00f3n a lo largo de todas las seeds. Mueve el slider para resaltar una seed espec\u00edfica: la l\u00ednea vertical marca d\u00f3nde cae su resultado y la insignia muestra su percentil. Observa c\u00f3mo la misma seed puede clasificarse de forma muy diferente entre condiciones \u2014 esto ilustra que controlar la semilla aleatoria no garantiza resultados consistentes ni transferibles, y extrapolar conclusiones a partir de una sola seed no es fiable (Secci\u00f3n 3.3).',
         seedNoSeedNote: 'En los experimentos de detecci\u00f3n no se pudo mantener una seed consistente entre ejecuciones de entrenamiento debido a limitaciones del framework. Por ello, el an\u00e1lisis de percentiles por seed no est\u00e1 disponible para este preset.',
         seedSliderLabel: 'Seed',
+        presetCpc18: 'CPC18 - Elecci\u00f3n bajo riesgo',
+        metricB1: 'BourginMLP',
+        metricB3: 'SparseMLP',
+        caseContextCpc18: 'CPC18 es un benchmark de ciencias del comportamiento para la elecci\u00f3n bajo riesgo: predice c\u00f3mo elige la gente entre opciones con riesgo. Portamos la misma metodolog\u00eda de ablaci\u00f3n consciente de la varianza a un conjunto de datos que esta comunidad ya usa. La m\u00e9trica es el error medio de predicci\u00f3n (MSE x100), as\u00ed que aqu\u00ed menor es mejor. Se muestran dos ablaciones factoriales, cada una reentrenada con 800 semillas por condici\u00f3n: la ablaci\u00f3n del BourginMLP barre tama\u00f1o de batch x learning rate, y la del SparseMLP barre epsilon x learning rate. La dispersi\u00f3n que ves es varianza real de semilla, no ruido a\u00f1adido.',
       }
     }
   });

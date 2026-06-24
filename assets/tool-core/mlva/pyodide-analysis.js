@@ -204,9 +204,16 @@ def _simulate_decision_paths(metric_data, selected_models, condition_meta, trial
                 sk_enc = np.zeros(trials, dtype=np.int64)
                 for rem_f in remaining:
                     sk_enc = sk_enc * len(factor_values[rem_f]) + chosen_li[rem_f]
-                unique_sk_encs = np.unique(sk_enc[valid_mask])
+                # Enumerate ALL step-1 level combinations (not only the ones the
+                # greedy happened to pick) so the tree stays complete: branches a
+                # greedy search never selects are shown with probability 0 instead
+                # of vanishing.
+                n_sk_total = 1
+                for rem_f in remaining:
+                    n_sk_total *= len(factor_values[rem_f])
+                all_sk_encs = list(range(n_sk_total))
                 enc_to_str = {}
-                for e in unique_sk_encs:
+                for e in all_sk_encs:
                     d = int(e)
                     parts = []
                     for rem_f in reversed(remaining):
@@ -217,16 +224,16 @@ def _simulate_decision_paths(metric_data, selected_models, condition_meta, trial
             else:
                 sk_enc = np.zeros(trials, dtype=np.int64)
                 enc_to_str = {0: '(none)'}
-                unique_sk_encs = np.array([0], dtype=np.int64)
+                all_sk_encs = [0]
 
             branches = []
-            for sk_e in sorted(unique_sk_encs):
+            for sk_e in sorted(all_sk_encs):
                 sk = enc_to_str[sk_e]
                 sk_mask = (sk_enc == sk_e) & valid_mask
                 sc = int(np.sum(sk_mask))
                 is_best_step1 = bool(np.any(step1_ok_mask & sk_mask))
                 options = []
-                for sv_val in sorted(np.unique(chosen_sf_vals[sk_mask])):
+                for sv_val in factor_values[start_factor]:
                     sv_mask = sk_mask & (chosen_sf_vals == sv_val)
                     c2 = int(np.sum(sv_mask))
                     r2 = int(np.sum(sv_mask & reach_ok_mask))
