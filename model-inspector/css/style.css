@@ -48,8 +48,8 @@
 
 .inspector-table thead th {
   font-weight: 600;
-  color: var(--clr-heading, currentColor);
-  background: var(--clr-surface-raised, transparent);
+  color: var(--clr-text, currentColor);
+  background: var(--clr-surface, transparent);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -60,7 +60,7 @@
 }
 
 .inspector-table tbody tr:hover {
-  background: var(--clr-surface-raised, rgba(1, 113, 186, 0.04));
+  background: var(--clr-surface, rgba(1, 113, 186, 0.04));
 }
 
 .col-name {
@@ -179,7 +179,7 @@
   margin: 0 0 0.6rem;
   font-size: var(--txt-md);
   font-weight: 600;
-  color: var(--clr-heading, currentColor);
+  color: var(--clr-text, currentColor);
 }
 
 .inspector-images-placeholder {

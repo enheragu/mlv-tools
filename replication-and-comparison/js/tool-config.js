@@ -23,6 +23,17 @@
           // computed in the negated space; display stays positive).
           mse: { file: '../raw_data/cpc18_mse_data_raw.yaml', scale: 'percent', lowerIsBetter: true }
         }
+      },
+      // Second CPC18 case: TWO variance sources (init x order, 35x35 factorial).
+      // The standard widgets (histogram, summary, misranking) operate on the
+      // 1,225 init x order runs per model exactly like a one-source preset; the
+      // `decomposition` extra adds the 2-D heatmap view (data-driven: any preset
+      // carrying it gets the extra dimension, one-source presets do not).
+      cpc18decomp: {
+        decomposition: '../raw_data/cpc18_variance_decomposition.json',
+        metrics: {
+          mse: { file: '../raw_data/cpc18_decomp_mse_data_raw.yaml', scale: 'percent', lowerIsBetter: true }
+        }
       }
     },
 
@@ -38,6 +49,9 @@
       },
       cpc18: {
         mse: 'yaml'
+      },
+      cpc18decomp: {
+        mse: 'yaml'
       }
     },
 
@@ -52,6 +66,9 @@
         recall: 3
       },
       cpc18: {
+        mse: 4
+      },
+      cpc18decomp: {
         mse: 4
       }
     },

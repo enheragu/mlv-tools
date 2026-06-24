@@ -234,8 +234,8 @@
   font-weight: 600;
   text-align: center;
 }
-.normality-ok  { color: var(--clr-success, #3fb950); }
-.normality-warn { color: var(--clr-warning, #d29922); }
+.normality-ok  { color: var(--clr-status-success, #3fb950); }
+.normality-warn { color: var(--clr-status-warning, #d29922); }
 .normality-fail { color: var(--clr-danger, #f85149); }
 .normality-na   { color: var(--txt-muted, var(--clr-muted)); }
 
@@ -275,7 +275,7 @@
   padding: .36rem .66rem;
   border: 1px solid color-mix(in oklab, var(--clr-primary) 48%, var(--clr-border));
   border-radius: 999px;
-  background: color-mix(in oklab, var(--clr-panel) 94%, var(--clr-surface));
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 94%, var(--clr-surface));
   color: var(--clr-text);
   font-size: var(--txt-sm-plus);
   box-shadow: 0 0 0 1px color-mix(in oklab, var(--clr-primary) 14%, transparent) inset;
@@ -289,7 +289,7 @@
   padding: .55rem .45rem;
   border: 1px solid color-mix(in oklab, var(--clr-border) 78%, transparent);
   border-radius: 10px;
-  background: color-mix(in oklab, var(--clr-surface) 94%, var(--clr-panel));
+  background: color-mix(in oklab, var(--clr-surface) 94%, var(--clr-panel, var(--clr-surface)));
 }
 
 .decision-factor-root {
@@ -314,7 +314,7 @@
   border: 1px solid color-mix(in oklab, var(--clr-border) 78%, transparent);
   border-radius: 9px;
   padding: .45rem .5rem;
-  background: color-mix(in oklab, var(--clr-surface) 92%, var(--clr-panel));
+  background: color-mix(in oklab, var(--clr-surface) 92%, var(--clr-panel, var(--clr-surface)));
 }
 
 .decision-node--best {
@@ -413,7 +413,7 @@
   border: 1px solid color-mix(in oklab, var(--clr-border) 78%, transparent);
   border-radius: 10px;
   padding: .5rem;
-  background: color-mix(in oklab, var(--clr-panel) 95%, var(--clr-surface));
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 95%, var(--clr-surface));
 }
 
 .decision-col-title {
@@ -439,7 +439,7 @@
   -webkit-tap-highlight-color: transparent;
   border: 1px solid color-mix(in oklab, var(--clr-border) 72%, transparent);
   border-radius: 8px;
-  background: color-mix(in oklab, var(--clr-panel) 92%, var(--clr-surface));
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 92%, var(--clr-surface));
   padding: .4rem .48rem;
   display: grid;
   gap: 2px;
@@ -497,7 +497,7 @@
   border: 1px solid color-mix(in oklab, var(--clr-border) 74%, transparent);
   border-radius: 8px;
   padding: .35rem;
-  background: color-mix(in oklab, var(--clr-surface) 94%, var(--clr-panel));
+  background: color-mix(in oklab, var(--clr-surface) 94%, var(--clr-panel, var(--clr-surface)));
 }
 
 .decision-step2-group.is-active {
@@ -535,7 +535,7 @@
 .decision-step-item {
   border: 1px solid color-mix(in oklab, var(--clr-border) 72%, transparent);
   border-radius: 8px;
-  background: color-mix(in oklab, var(--clr-panel) 92%, var(--clr-surface));
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 92%, var(--clr-surface));
   padding: .35rem .42rem;
   display: grid;
   gap: 3px;
@@ -576,7 +576,7 @@
   display: flex;
   align-items: stretch;
   justify-content: stretch;
-  background: color-mix(in oklab, var(--clr-panel) 94%, var(--clr-surface));
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 94%, var(--clr-surface));
 }
 
 .plot-placeholder-wrap {
@@ -696,7 +696,7 @@ body.mlva-busy * {
   max-width: 100%;
   min-height: 0;
   justify-self: center;
-  background: color-mix(in oklab, var(--clr-panel) 92%, var(--clr-surface));
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 92%, var(--clr-surface));
   padding: .32rem .36rem;
   text-align: center;
   justify-items: center;
@@ -817,7 +817,7 @@ body.mlva-busy * {
 
 #decision-tree-block .decision-choice,
 #decision-tree-block .decision-choice--compact {
-  background: color-mix(in oklab, var(--clr-panel) 92%, var(--clr-surface)) !important;
+  background: color-mix(in oklab, var(--clr-panel, var(--clr-surface)) 92%, var(--clr-surface)) !important;
 }
 
 #decision-tree-block .decision-start-choice.is-active {

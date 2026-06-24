@@ -32,6 +32,7 @@ custom_js:
   - js/i18n.js
   - /mlv-tools/assets/publications-config.js
   - js/bootstrap.js
+  - js/variance-decomposition.js
 ---
 <!--THEME_BODY-->
   <div class="content-shell">
@@ -87,7 +88,13 @@ custom_js:
         </main>
       </div>
     </section>
-  </div>
+
+  <section id="variance-decomposition-section" class="panel card prechecks-card widget-box-accent hidden">
+    <h2 id="vardecomp-title" class="shared-intro-title">Variance sources</h2>
+    <p id="vardecomp-intro" class="results-note"></p>
+    <div id="vardecomp-grids" class="vardecomp-grid"></div>
+    <div id="vardecomp-slicing" class="vardecomp-slicing"></div>
+  </section>
 
   <section id="results-section" class="hidden">
     {% include widgets/widget_section_heading.html
@@ -117,6 +124,7 @@ custom_js:
       %}
     </div>
   </section>
+  </div>
 
   <div id="chart-modal-overlay" class="chart-modal-overlay hidden" onclick="event.target===this && window.ReplicationComparisonApp?.closeChartModal?.()">
     <div class="chart-modal" onclick="event.stopPropagation()">
@@ -125,6 +133,16 @@ custom_js:
         <button id="btn-close-chart-modal" class="btn-outline btn-chart-close" type="button">Close</button>
       </div>
       <canvas id="distribution-chart-modal"></canvas>
+    </div>
+  </div>
+
+  <div id="vardecomp-modal-overlay" class="chart-modal-overlay hidden">
+    <div class="chart-modal" onclick="event.stopPropagation()">
+      <div class="chart-modal-head">
+        <h3 id="vardecomp-modal-title" class="shared-plot-modal-title">Variance heatmap</h3>
+        <button id="vardecomp-modal-close" class="btn-outline btn-chart-close" type="button">Close</button>
+      </div>
+      <canvas id="vardecomp-modal-canvas"></canvas>
     </div>
   </div>
 

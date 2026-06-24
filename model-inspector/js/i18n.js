@@ -5,8 +5,8 @@
       en: {
         pageTitle: 'Model & Data Inspector — MLV Tools',
         subtitle: 'Architecture and dataset reference for each model',
-        introTitle: 'Model and dataset reference',
-        introText: 'Browse architecture details, parameter counts, and dataset information for the models evaluated in the variance analysis study.',
+        introTitle: 'Know the models behind the numbers',
+        introText: 'Architecture diagrams, parameter counts and dataset details for every model in the study — the ground truth behind every variance comparison.',
         modelTableTitle: 'Model overview',
         colModel: 'Model',
         colType: 'Type',
@@ -32,8 +32,8 @@
       es: {
         pageTitle: 'Inspecto de Modelos y Datos — MLV Tools',
         subtitle: 'Referencia de arquitectura y dataset para cada modelo',
-        introTitle: 'Referencia de modelos y datasets',
-        introText: 'Consulta detalles de arquitectura, conteo de parámetros e información de los datasets utilizados en el estudio de análisis de varianza.',
+        introTitle: 'Conoce los modelos detrás de los números',
+        introText: 'Diagramas de arquitectura, conteo de parámetros y detalles de los datasets de cada modelo del estudio — qué compara en realidad cada análisis de varianza.',
         modelTableTitle: 'Resumen de modelos',
         colModel: 'Modelo',
         colType: 'Tipo',

@@ -324,6 +324,21 @@ def analyze(payload_json_str):
   var _callbacks = {};
   var _callId = 0;
 
+  // Free the Pyodide workers promptly when the page is hidden or unloaded, and
+  // reset state so they are lazily recreated if the page comes back (bfcache).
+  // Each worker holds a full Pyodide runtime, so this keeps repeated reloads
+  // from leaving heavy workers lingering.
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('pagehide', function () {
+      if (_workers) {
+        _workers.forEach(function (w) { try { if (w) w.terminate(); } catch (e) { /* ignore */ } });
+      }
+      _workers = null;
+      _workersReady = null;
+      _callbacks = {};
+    });
+  }
+
   function _getWorkers() {
     if (_workersReady) return _workersReady;
     _workersReady = new Promise(function (resolve, reject) {

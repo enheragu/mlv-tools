@@ -5,7 +5,7 @@
       en: {
         pageTitle: 'Standardizing Comparisons - ML Variance Analysis Tools',
         subtitle: 'Align metrics and protocols before comparing models',
-        introTitle: 'Standardization workspace',
+        introTitle: 'A single reported result is often one lucky run',
         introText: 'Single reported results often reflect one fortuitous run. The P90 or P95 percentiles offer a fairer comparison metric: they account for variance, are easy to compute from just a few runs, and balance between optimistic peak performance and realistic expected behavior. Visualize the survival function \u2014 the probability that at least one of N training runs exceeds a given percentile \u2014 to plan how many repetitions are needed for a target confidence level (Section 4.1).',
         chartTitle: 'Survival function plot',
         resultsIntro: 'Two complementary methods are used: Monte Carlo assumes the data follows a normal distribution (parametric), while Bootstrap resamples directly from the observed data (non-parametric). The normality check below helps decide how much to trust Monte Carlo \u2014 if normality is weak, rely on Bootstrap as the robust reference.',
@@ -23,7 +23,7 @@
       es: {
         pageTitle: 'Standardizing Comparisons - ML Variance Analysis Tools',
         subtitle: 'Alinea m\u00e9tricas y protocolos antes de comparar modelos',
-        introTitle: 'Espacio de estandarizaci\u00f3n',
+        introTitle: 'Un solo resultado publicado suele ser una ejecuci\u00f3n afortunada',
         introText: 'Un solo resultado publicado puede reflejar una ejecuci\u00f3n afortunada. Los percentiles P90 y P95 ofrecen una m\u00e9trica de comparaci\u00f3n m\u00e1s justa: tienen en cuenta la varianza, son f\u00e1ciles de calcular con pocas repeticiones y equilibran entre el rendimiento \u00f3ptimo y el comportamiento esperado realista. Visualiza la funci\u00f3n de supervivencia \u2014 la probabilidad de que al menos una de N ejecuciones supere un percentil dado \u2014 para planificar cu\u00e1ntas repeticiones se necesitan para un nivel de confianza objetivo (Secci\u00f3n 4.1).',
         chartTitle: 'Funci\u00f3n de supervivencia',
         resultsIntro: 'Se usan dos m\u00e9todos complementarios: Monte Carlo asume que los datos siguen una distribuci\u00f3n normal (param\u00e9trico), mientras que Bootstrap remuestrea directamente los datos observados (no param\u00e9trico). El test de normalidad de abajo ayuda a decidir cu\u00e1nto confiar en Monte Carlo \u2014 si la normalidad es d\u00e9bil, Bootstrap es la referencia robusta.',

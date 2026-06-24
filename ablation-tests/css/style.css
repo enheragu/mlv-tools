@@ -32,7 +32,7 @@
 }
 
 .seed-id-display code {
-  font-family: var(--ff-mono, monospace);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
 }
 
 .seed-pct-badge {

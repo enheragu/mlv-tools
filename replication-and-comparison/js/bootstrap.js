@@ -15,6 +15,11 @@
       toolTitle: 'Replication and Comparison',
       toolId: 'ReplicationAndComparison',
       fallbackLang: 'en',
+      // Notify the bespoke variance-decomposition view of preset/data changes
+      // (fires in addition to the built-in histogram; does not affect it).
+      onRenderChart: function (snapshot) {
+        document.dispatchEvent(new CustomEvent('replication-comparison:data-update', { detail: snapshot }));
+      },
     });
   }
 
