@@ -1242,6 +1242,12 @@ console.log('[comparison-app-core.js] Script loaded and running');
         normalLabel: copy.normalLegendLabel || 'Fitted normal (dotted line)',
         xTitle: metricLabel,
         yTitle: 'count',
+        // Clamp the X range to ±3.5σ (clipping extreme outliers) so the bulk of the
+        // distributions stays readable — e.g. CPC18's BourginMLP has rare seeds at
+        // MSE 6 while every other model lives in 0.5–1.7. No-op for outlier-free
+        // datasets (their full extent fits inside ±3.5σ).
+        rangeMode: 'sigma',
+        sigmaExtent: 3.5,
       });
       if (!nextChart) return;
 
