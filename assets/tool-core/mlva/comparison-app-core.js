@@ -1242,12 +1242,14 @@ console.log('[comparison-app-core.js] Script loaded and running');
         normalLabel: copy.normalLegendLabel || 'Fitted normal (dotted line)',
         xTitle: metricLabel,
         yTitle: 'count',
-        // Clamp the X range to ±3.5σ (clipping extreme outliers) so the bulk of the
-        // distributions stays readable — e.g. CPC18's BourginMLP has rare seeds at
-        // MSE 6 while every other model lives in 0.5–1.7. No-op for outlier-free
-        // datasets (their full extent fits inside ±3.5σ).
+        // Clamp the X range to ±2.5σ — the point where the fitted normal has dropped
+        // to ~4% of its peak (i.e. visually flat) — so the sparse outlier tail is
+        // trimmed and the bulk stays readable. CPC18's BourginMLP is right-skewed
+        // (bulk ~1.0, rare cells up to ~4.7); ±2.5σ keeps its real spread (~p95 ≈ 2.1)
+        // while cutting the empty tail. No-op for tight datasets (their full extent
+        // already fits inside ±2.5σ).
         rangeMode: 'sigma',
-        sigmaExtent: 3.5,
+        sigmaExtent: 2.5,
       });
       if (!nextChart) return;
 
