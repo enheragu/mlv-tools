@@ -46,7 +46,7 @@
         },
         replicationComparison: {
           title: 'Replication and Comparison',
-          desc: 'Compara distribuciones de métricas en repeticiones, inspecciona normales ajustadas y estima probabilidades de inversión de ranking en una sola corrida.'
+          desc: 'Compara distribuciones de métricas en repeticiones, inspecciona normales ajustadas y estima probabilidades de inversión de ranking en una sola ejecución.'
         },
         ablationTests: {
           title: 'Ablation Tests',
