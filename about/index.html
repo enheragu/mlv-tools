@@ -13,14 +13,15 @@ footer_credits_html: |
 umh_url: "https://www.umh.es/"
 i3e_url: "https://i3e.umh.es/"
 arvc_url: "https://arvc.umh.es/"
+with_about_page: true
 custom_css:
   - /mlv-tools/assets/tool-core/mlva/comparison-shell.css
-  - css/style.css
 custom_js:
   - js/i18n.js
-  - js/app.js
+  - /tool-pages-theme/assets/shared/tool-shell/about-page-core.js
 ---
 <div class="content-shell">
+  <script>window.AboutPageConfig = { toolTitle: {{ page.meta_title | jsonify }}, i18nGlobal: 'AboutMLVToolsI18n' };</script>
   <main class="about-main">
 
     {% capture about_body %}

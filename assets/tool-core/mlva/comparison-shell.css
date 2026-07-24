@@ -95,31 +95,7 @@
   cursor: default;
 }
 
-.chart-modal-overlay {
-  background: var(--clr-overlay-medium);
-  z-index: 2200;
-}
-
-.chart-modal {
-  width: min(96vw, 1150px);
-  height: min(90vh, 760px);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-modal-lg);
-  padding: .9rem 1rem 1rem;
-  overflow: hidden;
-  min-height: 0;
-}
-
-.chart-modal-head {
-  gap: .7rem;
-  margin-bottom: .5rem;
-}
-
-.chart-modal-head h3 {
-  font-size: var(--txt-base);
-  color: var(--clr-primary);
-}
-
+/* .chart-modal core now provided by shared app-shell.css */
 #distribution-chart-modal,
 #survival-chart-modal {
   height: auto !important;

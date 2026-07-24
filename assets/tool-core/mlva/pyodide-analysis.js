@@ -294,35 +294,27 @@ def analyze(payload_json_str):
     return json.dumps({'expected_order': expected_order, 'normality': normality, 'switched': switched, 'decision_paths': []})
 `;
 
-  var WORKER_SRC = [
-    "importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js');",
-    'var _pyodide = null;',
-    'async function _init(pythonCode) {',
-    '  _pyodide = await loadPyodide();',
-    "  await _pyodide.loadPackage(['numpy']);",
-    '  _pyodide.runPython(pythonCode);',
-    "  _pyodide.loadPackage(['scipy']).catch(function () {});",
-    "  postMessage({ type: 'ready' });",
-    '}',
-    'onmessage = function (e) {',
-    '  var d = e.data;',
-    "  if (d.type === 'init') { _init(d.pythonCode); return; }",
-    "  if (d.type === 'analyze') {",
-    '    try {',
-    "      _pyodide.globals.set('_payload_json', d.payload);",
-    "      var result = _pyodide.runPython('analyze(_payload_json)');",
-    "      postMessage({ type: 'result', id: d.id, result: result });",
-    '    } catch (err) {',
-    "      postMessage({ type: 'error', id: d.id, error: String(err) });",
-    '    }',
-    '  }',
-    '};',
-  ].join('\n');
+  // Two dedicated single-worker runtimes (not one 2-worker pool): 'mc' and 'bs'
+  // calls must land on their own worker so each keeps its own warm Pyodide +
+  // module-level state, matching the original worker[0]=mc/worker[1]=bs split.
+  var _runtimes = { mc: null, bs: null };
 
-  var _workers = null;
-  var _workersReady = null;
-  var _callbacks = {};
-  var _callId = 0;
+  function _getRuntime(role) {
+    if (_runtimes[role]) return _runtimes[role];
+    var rt = window.PyodideRuntime.create({
+      id: 'mlva-' + role,
+      packages: ['numpy'],
+      pythonCode: ANALYSIS_PY,
+    });
+    // scipy (used only for the optional Shapiro normality test) loads lazily
+    // in the background so first-analysis latency isn't blocked on it, same
+    // as the original worker's fire-and-forget loadPackage(['scipy']).
+    rt.ready().then(function () {
+      rt.loadPackages(['scipy']).catch(function () {});
+    });
+    _runtimes[role] = rt;
+    return rt;
+  }
 
   // Free the Pyodide workers promptly when the page is hidden or unloaded, and
   // reset state so they are lazily recreated if the page comes back (bfcache).
@@ -330,68 +322,16 @@ def analyze(payload_json_str):
   // from leaving heavy workers lingering.
   if (typeof window !== 'undefined' && window.addEventListener) {
     window.addEventListener('pagehide', function () {
-      if (_workers) {
-        _workers.forEach(function (w) { try { if (w) w.terminate(); } catch (e) { /* ignore */ } });
-      }
-      _workers = null;
-      _workersReady = null;
-      _callbacks = {};
+      ['mc', 'bs'].forEach(function (role) {
+        if (_runtimes[role]) { try { _runtimes[role].terminate(); } catch (e) { /* ignore */ } }
+        _runtimes[role] = null;
+      });
     });
   }
 
-  function _getWorkers() {
-    if (_workersReady) return _workersReady;
-    _workersReady = new Promise(function (resolve, reject) {
-      var ws = [null, null];
-      var ready = 0;
-
-      function makeWorker(idx) {
-        var blob = new Blob([WORKER_SRC], { type: 'application/javascript' });
-        var url = URL.createObjectURL(blob);
-        var w = new Worker(url);
-        URL.revokeObjectURL(url);
-
-        w.addEventListener('message', function (e) {
-          var d = e.data;
-          if (d.type === 'ready') {
-            ready += 1;
-            if (ready === 2) { _workers = ws; resolve(ws); }
-            return;
-          }
-          var cb = _callbacks[d.id];
-          if (!cb) return;
-          delete _callbacks[d.id];
-          if (d.type === 'result') cb.resolve(JSON.parse(d.result));
-          else cb.reject(new Error(d.error));
-        });
-
-        w.onerror = function (err) {
-          _workersReady = null;
-          _workers = null;
-          reject(new Error('Pyodide worker failed: ' + (err.message || err)));
-        };
-
-        ws[idx] = w;
-        w.postMessage({ type: 'init', pythonCode: ANALYSIS_PY });
-      }
-
-      makeWorker(0);
-      makeWorker(1);
-    });
-
-    _workersReady.catch(function () {
-      _workersReady = null;
-      _workers = null;
-    });
-
-    return _workersReady;
-  }
-
-  function _dispatch(worker, payload) {
-    return new Promise(function (resolve, reject) {
-      var id = ++_callId;
-      _callbacks[id] = { resolve: resolve, reject: reject };
-      worker.postMessage({ type: 'analyze', id: id, payload: JSON.stringify(payload) });
+  function _dispatch(role, payload) {
+    return _getRuntime(role).call('analyze', JSON.stringify(payload)).then(function (resultJson) {
+      return JSON.parse(resultJson);
     });
   }
 
@@ -500,10 +440,9 @@ def analyze(payload_json_str):
   }
 
   async function analyze(payload) {
-    var workers = await _getWorkers();
     var results = await Promise.all([
-      _dispatch(workers[0], Object.assign({}, payload, { sim_method: 'mc' })),
-      _dispatch(workers[1], Object.assign({}, payload, { sim_method: 'bs' })),
+      _dispatch('mc', Object.assign({}, payload, { sim_method: 'mc' })),
+      _dispatch('bs', Object.assign({}, payload, { sim_method: 'bs' })),
     ]);
     var mc = results[0];
     var bs = results[1];
@@ -518,10 +457,14 @@ def analyze(payload_json_str):
 
   window.PyodideAnalysis = { analyze: analyze };
 
-  // Pre-warm both workers as soon as the page loads
+  // Pre-warm both runtimes as soon as the page loads
+  function _prewarm() {
+    _getRuntime('mc').ready().catch(function () {});
+    _getRuntime('bs').ready().catch(function () {});
+  }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { _getWorkers().catch(function () {}); });
+    document.addEventListener('DOMContentLoaded', _prewarm);
   } else {
-    _getWorkers().catch(function () {});
+    _prewarm();
   }
 })();

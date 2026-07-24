@@ -141,7 +141,7 @@
 
     var cL = window.SharedChartLegend;
     var palette = (cL && cL.getDataPalette) ? cL.getDataPalette() : null;
-    var defaultColors = ['#58a6ff', '#f97583', '#d2a8ff', '#79c0ff', '#56d364', '#e3b341', '#ff7b72', '#bc8cff'];
+    var defaultColors = ['#58a6ff', '#d29922', '#3fb950', '#bc8cff', '#f85149', '#6e7681'];
 
     plots.forEach(function (plot, pi) {
       var canvasId = 'interaction-chart-' + pi;

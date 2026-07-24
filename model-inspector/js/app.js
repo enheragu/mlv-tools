@@ -487,51 +487,46 @@
   // MERMAID
   // ============================================================
 
-  // All colors from theme-tokens.css:
-  // --pal-blue=#58a6ff, --pal-purple=#bc8cff, --pal-gray=#6e7681
-  // --clr-text light=#3a4658 dark=#e6edf3 / --clr-bg light=#f4f6f9 dark=#0d1117
-  var MERMAID_VARS = {
-    light: {
-      primaryColor:        '#58a6ff22',
-      primaryTextColor:    '#3a4658',
-      primaryBorderColor:  '#58a6ff',
-      lineColor:           '#6e7681',
-      background:          '#f4f6f9',
-      mainBkg:             '#58a6ff22',
-      nodeBorder:          '#58a6ff',
-      clusterBkg:          '#3fb95022',
-      clusterBorder:       '#3fb950',
-      titleColor:          '#3a4658',
-      edgeLabelBackground: '#f4f6f9',
+  // Colors resolved from theme tokens at render time (fallbacks mirror the
+  // current palette) so mermaid follows --pal-*/--clr-* retoning automatically.
+  function themeToken(name, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
+  }
+
+  function mermaidVars() {
+    var dark = isDark();
+    var blue = themeToken('--pal-blue', '#58a6ff');
+    var green = themeToken('--pal-green', '#3fb950');
+    var gray = themeToken('--pal-gray', '#6e7681');
+    var text = themeToken('--clr-text', dark ? '#e6edf3' : '#3a4658');
+    var bg = themeToken('--clr-bg', dark ? '#0d1117' : '#f4f6f9');
+    var surface = themeToken('--clr-surface', dark ? '#161b22' : '#ffffff');
+    return {
+      primaryColor:        blue + '22',
+      primaryTextColor:    text,
+      primaryBorderColor:  blue,
+      lineColor:           gray,
+      background:          bg,
+      mainBkg:             blue + '22',
+      nodeBorder:          blue,
+      clusterBkg:          green + '22',
+      clusterBorder:       green,
+      titleColor:          text,
+      edgeLabelBackground: dark ? surface : bg,
       fontFamily:          'ui-sans-serif, system-ui, sans-serif'
-    },
-    dark: {
-      primaryColor:        '#58a6ff22',
-      primaryTextColor:    '#e6edf3',
-      primaryBorderColor:  '#58a6ff',
-      lineColor:           '#6e7681',
-      background:          '#0d1117',
-      mainBkg:             '#58a6ff22',
-      nodeBorder:          '#58a6ff',
-      clusterBkg:          '#3fb95022',
-      clusterBorder:       '#3fb950',
-      titleColor:          '#e6edf3',
-      edgeLabelBackground: '#161b22',
-      fontFamily:          'ui-sans-serif, system-ui, sans-serif'
-    }
-  };
+    };
+  }
 
   // classDef blockStyle overrides per-node; noBox removes fill/stroke for label nodes
-  var CLASSDEFS = {
-    light: [
-      'classDef blockStyle fill:#58a6ff22,stroke:#58a6ff,stroke-width:2px,color:#3a4658,font-weight:normal',
-      'classDef noBox fill:none,stroke:none,color:#3a4658,font-weight:normal'
-    ],
-    dark: [
-      'classDef blockStyle fill:#58a6ff22,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,font-weight:normal',
-      'classDef noBox fill:none,stroke:none,color:#e6edf3,font-weight:normal'
-    ]
-  };
+  function mermaidClassDefs() {
+    var blue = themeToken('--pal-blue', '#58a6ff');
+    var text = themeToken('--clr-text', isDark() ? '#e6edf3' : '#3a4658');
+    return [
+      'classDef blockStyle fill:' + blue + '22,stroke:' + blue + ',stroke-width:2px,color:' + text + ',font-weight:normal',
+      'classDef noBox fill:none,stroke:none,color:' + text + ',font-weight:normal'
+    ];
+  }
 
   var diagramCounter = 0;
 
@@ -541,8 +536,8 @@
       return;
     }
     var dark  = isDark();
-    var tvars = dark ? MERMAID_VARS.dark  : MERMAID_VARS.light;
-    var defs  = dark ? CLASSDEFS.dark     : CLASSDEFS.light;
+    var tvars = mermaidVars();
+    var defs  = mermaidClassDefs();
     var initBlock = '%%{init: {"theme": "base", "themeVariables": ' + JSON.stringify(tvars) + '}}%%\n';
     var themedSrc = initBlock + src + '\n' + defs[0] + '\n' + defs[1];
     var id = 'mi-diagram-' + (++diagramCounter);
