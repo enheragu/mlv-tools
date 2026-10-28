@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "MLV Tools: Interactive Web Applications for Machine Learning Variance Analysis"
+abstract: >-
+  MLV Tools is a collection of interactive, browser-based web applications
+  developed as a companion to the paper "The Impact of Performance Variability
+  on Neural Network Evaluation and its Implications for Model Design". The
+  tools allow researchers to reproduce and explore the paper's results
+  interactively, and apply the same analyses to their own data. It includes:
+  (1) Model & Data Inspector, for visualizing training run distributions across
+  conditions and datasets; (2) Replication and Comparison, for estimating the
+  probability of misranking models due to variance overlap under limited
+  training runs; (3) Ablation Tests, for exploring hyperparameter interactions
+  and quantifying the error probability of sequential ablation strategies; and
+  (4) Standardizing Comparisons, for planning how many training runs are needed
+  to reach a target performance percentile with a given confidence level. All
+  tools run entirely in the browser with no installation required. Available
+  online at https://enheragu.github.io/mlv-tools/
+authors:
+  - family-names: Heredia-Aguado
+    given-names: Enrique
+    orcid: "https://orcid.org/0009-0001-7717-1428"
+    affiliation: "University Institute for Engineering Research, Miguel Hernández University"
+  - family-names: Rujano
+    given-names: Alejandro
+    orcid: "https://orcid.org/0009-0000-7581-2378"
+    affiliation: "Centro San Camilo"
+  - family-names: Valiente
+    given-names: David
+    orcid: "https://orcid.org/0000-0002-2245-0542"
+    affiliation: "Miguel Hernández University"
+  - family-names: Gil
+    given-names: Arturo
+    orcid: "https://orcid.org/0000-0001-7811-8955"
+    affiliation: "Miguel Hernández University"
+repository-code: "https://github.com/enheragu/mlv-tools"
+url: "https://enheragu.github.io/mlv-tools/"
+keywords:
+  - machine learning
+  - neural networks
+  - performance variability
+  - model evaluation
+  - reproducibility
+  - ablation study
+  - web application
+date-released: 2026-05-18
+license: CC-BY-4.0
+doi: 10.5281/zenodo.20268237
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20268237
+    description: "Concept DOI: all versions, resolves to the latest release"
+  - type: doi
+    value: 10.5281/zenodo.20268238
+    description: "Release of 2026-05-18"
