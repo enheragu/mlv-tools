@@ -55,6 +55,7 @@
         { label: 'Classes',          label_es: 'Clases',                    value: '10 (digits 0–9)' },
         { label: 'Format',           label_es: 'Formato',                   value: 'Grayscale PNG / IDX binary' }
       ],
+      sampleLicense: { name: 'CC BY-SA 3.0', url: 'https://creativecommons.org/licenses/by-sa/3.0/' },
       sampleDir: 'assets/sample-images/mnist/',
       sampleFiles: [
         'image_0.png', 'image_1.png', 'image_2.png', 'image_3.png',
@@ -76,6 +77,7 @@
         { label: 'Task',         label_es: 'Tarea',             value: 'Pedestrian detection' },
         { label: 'Model',        label_es: 'Modelo',            value: 'YOLOv8 with multiple fusion strategies' }
       ],
+      sampleLicense: { name: 'CC BY-NC-SA 4.0', url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/' },
       sampleDir: 'assets/sample-images/kaist/',
       sampleGroups: [
         { key: 'kaistDay', pairs: [
@@ -754,6 +756,10 @@
               '<tbody>' + statsHtml + '</tbody>' +
             '</table>' +
             '<p class="inspector-citation"><strong>' + (copy.citationLabel || 'Citation') + ':</strong> ' + dataset.citation + '</p>' +
+            (dataset.sampleLicense
+              ? '<p class="inspector-citation"><strong>' + (copy.sampleLicenseLabel || 'Sample images license') + ':</strong> ' +
+                  '<a href="' + dataset.sampleLicense.url + '" target="_blank" rel="noopener noreferrer">' + dataset.sampleLicense.name + '</a></p>'
+              : '') +
             noteHtml +
           '</div>' +
           (imagesHtml

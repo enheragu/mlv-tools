@@ -23,15 +23,6 @@
     },
     "links": [
       {
-        "key": "mnist_learning_playground",
-        "label": "mnist-learning-playground",
-        "url": "https://github.com/enheragu/mnist-learning-playground",
-        "description": {
-          "en": "Source repository for repeated-run MNIST calculations used in this analysis.",
-          "es": "Repositorio origen de los c\u00e1lculos con repeticiones en MNIST usados en este an\u00e1lisis."
-        }
-      },
-      {
         "key": "yolo_test_utils",
         "label": "yolo_test_utils",
         "url": "https://github.com/enheragu/yolo_test_utils",
@@ -42,6 +33,10 @@
       }
     ],
     "publication_keys": [
+      "heredia2026mnist_playground",
+      "heredia2026cpc18_playground",
+      "heredia2026pertrial_mnist",
+      "heredia2026pertrial_cpc18",
       "heredia2025fusion_static"
     ]
   },

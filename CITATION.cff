@@ -16,7 +16,9 @@ abstract: >-
   (4) Standardizing Comparisons, for planning how many training runs are needed
   to reach a target performance percentile with a given confidence level. All
   tools run entirely in the browser with no installation required. Available
-  online at https://enheragu.github.io/mlv-tools/
+  online at https://enheragu.github.io/mlv-tools/. The MIT license covers the
+  code; the sample images keep the licenses of their datasets (MNIST, CC BY-SA
+  3.0; KAIST, CC BY-NC-SA 4.0).
 authors:
   - family-names: Heredia-Aguado
     given-names: Enrique
@@ -29,11 +31,11 @@ authors:
   - family-names: Valiente
     given-names: David
     orcid: "https://orcid.org/0000-0002-2245-0542"
-    affiliation: "Miguel Hernández University"
+    affiliation: "University Institute for Engineering Research, Miguel Hernández University"
   - family-names: Gil
     given-names: Arturo
     orcid: "https://orcid.org/0000-0001-7811-8955"
-    affiliation: "Miguel Hernández University"
+    affiliation: "University Institute for Engineering Research, Miguel Hernández University"
 repository-code: "https://github.com/enheragu/mlv-tools"
 url: "https://enheragu.github.io/mlv-tools/"
 keywords:
@@ -44,8 +46,9 @@ keywords:
   - reproducibility
   - ablation study
   - web application
+version: 1.0.0
 date-released: 2026-05-18
-license: CC-BY-4.0
+license: MIT
 doi: 10.5281/zenodo.20268237
 identifiers:
   - type: doi
@@ -53,4 +56,37 @@ identifiers:
     description: "Concept DOI: all versions, resolves to the latest release"
   - type: doi
     value: 10.5281/zenodo.20268238
-    description: "Release of 2026-05-18"
+    description: "Version 1.0.0"
+# TBC on the next release (first one archived through the Zenodo-GitHub integration): set `version`
+# and `date-released` to it and add its version DOI. If Zenodo mints a new concept DOI instead of adding
+# the version to this record, set `doi:` to the new concept DOI and keep the two above as the previous
+# record (v1.0.0, uploaded manually).
+references:
+  - type: software
+    title: "Performance variability of neural network training on MNIST and YOLO object detection: training and analysis code"
+    authors:
+      - family-names: Heredia-Aguado
+        given-names: Enrique
+      - family-names: Rujano
+        given-names: Alejandro
+      - family-names: Valiente
+        given-names: David
+      - family-names: Gil
+        given-names: Arturo
+    doi: 10.5281/zenodo.24003004
+    repository-code: "https://github.com/enheragu/mnist-learning-playground"
+    notes: "Its export script generates the MNIST and YOLOv8 data files of the viewer (raw_data/) from the per-trial deposit of the article."
+  - type: software
+    title: "Variance-aware evaluation of CPC18 choice prediction models: training and analysis code"
+    authors:
+      - family-names: Heredia-Aguado
+        given-names: Enrique
+      - family-names: Rujano
+        given-names: Alejandro
+      - family-names: Valiente
+        given-names: David
+      - family-names: Gil
+        given-names: Arturo
+    doi: 10.5281/zenodo.24013058
+    repository-code: "https://github.com/enheragu/cpc18-learning-playground"
+    notes: "Its export script generates the CPC18 data files of the viewer (raw_data/) from the per-trial deposit of the article."

@@ -18,14 +18,26 @@ Web version:
 Documentation:
 
 - i18n policy: `docs/i18n-policy.md`
+- version history: [`CHANGELOG.md`](CHANGELOG.md)
 
 ## How to cite
 
 If you use these tools, please cite them: the metadata are in [`CITATION.cff`](CITATION.cff), and GitHub's
 *Cite this repository* button exports them as APA or BibTeX. The DOI
 [10.5281/zenodo.20268237](https://doi.org/10.5281/zenodo.20268237) always resolves to the latest release;
-each release also has its own DOI (2026-05-18 release: [10.5281/zenodo.20268238](https://doi.org/10.5281/zenodo.20268238)),
+each release also has its own DOI (v1.0.0: [10.5281/zenodo.20268238](https://doi.org/10.5281/zenodo.20268238)),
 which is the one to cite when reporting results obtained with that version.
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE). The exceptions are the sample
+images in `model-inspector/assets/sample-images/`, which keep the license of their datasets, and the
+institutional logos of the About page, which belong to their owners:
+
+- `mnist/`: MNIST, by Y. LeCun and C. Cortes,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+- `kaist/`: KAIST Multispectral Pedestrian Dataset, by S. Hwang et al.,
+  [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), non-commercial use only.
 
 ---
 
