@@ -72,8 +72,10 @@ def _simulate_switched(metric_data, expected_order, n_samples, trials, method):
     else:
         groups = [np.random.choice(metric_data[m], size=(trials, n_samples), replace=True) for m in expected_order]
     best = np.column_stack([np.max(g, axis=1) for g in groups])
-    sim_orders = np.argsort(best, axis=1)
-    return float(np.count_nonzero(np.any(sim_orders != orig_idx, axis=1)) / trials)
+    # Only a strict inversion counts: a tie reverses nothing, and resolving it by position would
+    # depend on the order of the models (same rule as mnist-learning-playground).
+    in_orig_order = best[:, orig_idx]
+    return float(np.count_nonzero(np.any(np.diff(in_orig_order, axis=1) < 0, axis=1)) / trials)
 
 def _simulate_decision_paths(metric_data, selected_models, condition_meta, trials, method):
     from itertools import product as iproduct

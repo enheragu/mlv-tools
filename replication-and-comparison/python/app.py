@@ -345,8 +345,10 @@ def _simulate_switched_probability(
         raise ValueError("Unknown simulation method")
 
     best_per_group = np.column_stack([np.max(group_samples, axis=1) for group_samples in samples_per_group])
-    simulated_orders = np.argsort(best_per_group, axis=1)
-    switched_count = np.count_nonzero(np.any(simulated_orders != original_order_idx, axis=1))
+    # Only a strict inversion counts: a tie reverses nothing, and resolving it by position would
+    # depend on the order of the models (same rule as mnist-learning-playground).
+    in_original_order = best_per_group[:, original_order_idx]
+    switched_count = np.count_nonzero(np.any(np.diff(in_original_order, axis=1) < 0, axis=1))
     return float(switched_count / trials)
 
 

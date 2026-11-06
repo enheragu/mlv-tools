@@ -20,29 +20,25 @@
         metrics: {
           map50: {
             files: [
-              '../raw_data/mAP50_data_raw.yaml',
-              '../raw_data/ablation_mAP50_data_raw.yaml'
+              '../raw_data/mAP50_data_raw.yaml'
             ],
             scale: 'ratio'
           },
           map5095: {
             files: [
-              '../raw_data/mAP50-95_data_raw.yaml',
-              '../raw_data/ablation_mAP50-95_data_raw.yaml'
+              '../raw_data/mAP50-95_data_raw.yaml'
             ],
             scale: 'ratio'
           },
           precision: {
             files: [
-              '../raw_data/P_data_raw.yaml',
-              '../raw_data/ablation_P_data_raw.yaml'
+              '../raw_data/P_data_raw.yaml'
             ],
             scale: 'ratio'
           },
           recall: {
             files: [
-              '../raw_data/R_data_raw.yaml',
-              '../raw_data/ablation_R_data_raw.yaml'
+              '../raw_data/R_data_raw.yaml'
             ],
             scale: 'ratio'
           }
